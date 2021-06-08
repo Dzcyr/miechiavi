@@ -15,20 +15,16 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('weapp_openid')->unique();
+            $table->string('weixin_session_key');
+            $table->string('nickname')->nullable();
+            $table->string('avatar')->nullable();
+            $table->tinyInteger('gender')->unsigned()->nullable();
+            $table->tinyInteger('status')->unsigned()->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('users');
