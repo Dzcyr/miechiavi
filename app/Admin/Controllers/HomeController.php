@@ -2,33 +2,33 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Encore\Admin\Controllers\Dashboard;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Payment;
+use Encore\Admin\Layout\Row;
 use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
-use Encore\Admin\Layout\Row;
+use Encore\Admin\Widgets\InfoBox;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     public function index(Content $content)
     {
         return $content
-            ->title('Dashboard')
-            ->description('Description...')
-            ->row(Dashboard::title())
+            ->title('首页')
+            ->row(view('admin.home.title'))
             ->row(function (Row $row) {
-
                 $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::environment());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::extensions());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::dependencies());
+                    $column->append($this->InfoBox('用户数量', 'users', 'aqua', '/admin/users', User::get()->count()));
                 });
             });
+    }
+
+    public function InfoBox($title, $icon, $color, $href, $data)
+    {
+        // 参数1为标题 参数2为图标 参数3为颜色 参数4为跳转链接 参数5为数据
+        $infoBox = new InfoBox($title, $icon, $color, $href, $data);
+        return $infoBox->render();
     }
 }
