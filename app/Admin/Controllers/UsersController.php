@@ -22,6 +22,8 @@ class UsersController extends AdminController
 
         $grid->id('ID');
         $grid->weapp_openid('OPENID')->copyable();
+        $grid->nickname('昵称')->copyable();
+        $grid->avatar('头像')->image();
         $grid->created_at('注册时间');
 
         // 禁用创建按钮

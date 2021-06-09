@@ -15,12 +15,12 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('weapp_openid')->unique();
-            $table->string('weixin_session_key');
-            $table->string('nickname')->nullable();
-            $table->string('avatar')->nullable();
-            $table->tinyInteger('gender')->unsigned()->nullable();
-            $table->tinyInteger('status')->unsigned()->default(0);
+            $table->string('weapp_openid')->unique()->comment('OPEN ID');
+            $table->string('weixin_session_key')->comment('SESSION KEY');
+            $table->string('nickname')->nullable()->comment('昵称');
+            $table->string('avatar')->nullable()->comment('头像');
+            $table->tinyInteger('gender')->unsigned()->nullable()->comment('性别');
+            $table->tinyInteger('is_delete')->unsigned()->default(0)->comment('是否删除');
             $table->timestamps();
         });
     }

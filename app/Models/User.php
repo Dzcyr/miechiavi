@@ -11,7 +11,7 @@ class User extends Authenticatable implements JWTSubject
     use DefaultDatetimeFormat;
 
     protected $fillable = [
-        'weapp_openid', 'weixin_session_key', 'nickname', 'avatar', 'gender', 'status'
+        'weapp_openid', 'weixin_session_key', 'nickname', 'avatar', 'gender', 'is_delete'
     ];
 
     public function getJWTIdentifier()
