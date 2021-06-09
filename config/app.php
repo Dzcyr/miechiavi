@@ -166,7 +166,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        // OSS 上传
+        Jacobcyl\AliOSS\AliOssServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -53,6 +53,24 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'admin' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'oss' => [
+            'driver'        => 'oss',
+            'access_id'     => env('ALI_OSS_ACCESS_ID'),
+            'access_key'    => env('ALI_OSS_ACCESS_KEY'),
+            'bucket'        => env('ALI_OSS_BUCKET'),
+            'endpoint'      => env('ALI_OSS_ENDPOINT'), // OSS 外网节点或自定义外部域名
+            'cdnDomain'     => env('ALI_OSS_DOMAIN'), // 如果isCName为true, getUrl会判断cdnDomain是否设定来决定返回的url，如果cdnDomain未设置，则使用endpoint来生成url，否则使用cdn
+            'ssl'           => true, // true to use 'https://' and false to use 'http://'. default is false,
+            'isCName'       => false, // 是否使用自定义域名,true: 则Storage.url()会使用自定义的cdn或域名生成文件url， false: 则使用外部节点生成url
+            'debug'         => false
+        ],
     ],
 
     /*
