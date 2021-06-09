@@ -63,5 +63,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        // JWT 过期自动刷新Token
+        'api.refresh'=>\App\Http\Middleware\Api\RefreshTokenMiddleware::class,
     ];
 }
