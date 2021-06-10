@@ -1,5 +1,9 @@
 <?php
 
+use Encore\Admin\Form;
+use Encore\Admin\Grid;
+use App\Admin\Extensions\WangEditor;
+
 /**
  * Laravel-admin - admin builder based on Laravel.
  * @author z-song <https://github.com/z-song>
@@ -18,4 +22,28 @@
  *
  */
 
-Encore\Admin\Form::forget(['map', 'editor']);
+Encore\Admin\Form::forget(['map']);
+
+Form::extend('editor', WangEditor::class);
+
+// 表格初始化
+Grid::init(function (Grid $grid) {
+    $grid->disableRowSelector();
+    $grid->actions(function (Grid\Displayers\Actions $actions) {
+        $actions->disableView();
+        $actions->disableDelete();
+    });
+});
+
+// 表单初始化
+Form::init(function (Form $form) {
+    $form->tools(function (Form\Tools $tools) {
+        // 去掉`查看`按钮
+        $tools->disableView();
+    });
+
+    $form->footer(function ($footer) {
+        // 去掉`查看`checkbox
+        $footer->disableViewCheck();
+    });
+});

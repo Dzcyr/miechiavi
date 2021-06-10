@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Api\AuthorizationsController;
+use App\Http\Controllers\Api\BannersController;
 
 Route::namespace('Api')->prefix('v1')->group(function () {
     //Route::middleware('throttle:' . config('api.rate_limits.sign'))->group(function () {
@@ -14,5 +16,7 @@ Route::namespace('Api')->prefix('v1')->group(function () {
         Route::middleware('api.refresh')->group(function() {
         
         });
+        // 轮播图
+        Route::get('banners', [BannersController::class, 'index']);
     });
 });
