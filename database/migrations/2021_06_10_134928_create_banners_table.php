@@ -16,12 +16,12 @@ class CreateBannersTable extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title')->comment('标题');
-            $table->tinyInteger('type')->unsigned()->default(1)->comment('类型 1.默认 2.通知 3.咨询');
+            $table->tinyInteger('type')->unsigned()->default(1)->comment('类型');
             $table->string('image')->comment('展示图');
             $table->text('desc')->comment('详情');
             $table->integer('rank')->comment('顺序');
-            $table->tinyInteger('is_delete')->unsigned()->default(0)->comment('是否删除 0.否 1.是');
-            
+            $table->tinyInteger('is_delete')->unsigned()->default(0)->comment('是否删除');
+
             $table->timestamps();
         });
     }

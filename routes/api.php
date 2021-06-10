@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\BannersController;
+use App\Http\Controllers\Api\HousingsController;
 
 Route::namespace('Api')->prefix('v1')->group(function () {
     //Route::middleware('throttle:' . config('api.rate_limits.sign'))->group(function () {
@@ -14,7 +15,8 @@ Route::namespace('Api')->prefix('v1')->group(function () {
     Route::middleware('throttle:' . config('api.rate_limits.access'))->group(function () {
         // 登录后可以访问的接口
         Route::middleware('api.refresh')->group(function() {
-        
+            // 房源
+            Route::apiResource('housing', [HousingsController::class]);
         });
         // 轮播图
         Route::get('banners', [BannersController::class, 'index']);

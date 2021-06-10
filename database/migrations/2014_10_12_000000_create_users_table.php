@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('nickname')->nullable()->comment('昵称');
             $table->string('avatar')->nullable()->comment('头像');
             $table->tinyInteger('gender')->unsigned()->nullable()->comment('性别');
-            $table->tinyInteger('is_delete')->unsigned()->default(0)->comment('是否删除 0.否 1.是');
+            $table->tinyInteger('is_delete')->unsigned()->default(0)->comment('是否删除');
             $table->timestamps();
         });
     }
