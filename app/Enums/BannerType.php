@@ -6,22 +6,22 @@ use BenSampo\Enum\Enum;
 
 final class BannerType extends Enum
 {
-    const TYPE_DEFAULT = 1;
-    const TYPE_NOTICE = 2;
-    const TYPE_CONSULT = 3;
+    const DEFAULT = 1;
+    const NOTICE = 2;
+    const CONSULT = 3;
 
     public static function getDescription($value): string
 	{
 		switch ($value) {
-			case self::TYPE_DEFAULT:
+			case self::DEFAULT:
 				return '默认';
 				break;
 			
-			case self::TYPE_NOTICE:
+			case self::NOTICE:
 				return '通知';
 				break;
 
-			case self::TYPE_CONSULT:
+			case self::CONSULT:
 				return '咨询';
 				break;
 		}
