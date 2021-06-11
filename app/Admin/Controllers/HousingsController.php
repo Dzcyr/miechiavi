@@ -15,87 +15,42 @@ use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, Hou
 
 class HousingsController extends AdminController
 {
-    /**
-     * Title for current resource.
-     *
-     * @var string
-     */
-    protected $title = 'Housing';
+    protected $title = '房源';
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
     protected function grid()
     {
         $grid = new Grid(new Housing());
 
-        $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('title', __('Title'));
-        $grid->column('rent', __('Rent'));
-        $grid->column('floor', __('Floor'));
-        $grid->column('space', __('Space'));
-        $grid->column('type', __('Type'));
-        $grid->column('house_type', __('House type'));
-        $grid->column('toward', __('Toward'));
-        $grid->column('province', __('Province'));
-        $grid->column('city', __('City'));
-        $grid->column('district', __('District'));
-        $grid->column('address', __('Address'));
-        $grid->column('heating', __('Heating'));
+        $grid->id('ID')->sortable();
+        $grid->user()->nickname('所属用户')->copyable();
+        $grid->title('标题')->editable()->copyable();
+        $grid->rent('租金(€)')->sortable();
+        $grid->floor('楼层')->sortable();
+        $grid->space('房屋面积(㎡)')->sortable();
+        $grid->type('租房类型')->display(function ($type) {
+            return HousingType::getDescription($type);
+        });
+        $grid->house_type('户型')->display(function ($house_type) {
+            return HousingHouseType::getDescription($house_type);
+        });
+        $grid->toward('朝向')->display(function ($toward) {
+            return HousingToward::getDescription($toward);
+        });
+        $grid->province('省');
+        $grid->city('市');
+        $grid->district('区');
+        $grid->address('详细地址');
+        $grid->heating('供暖方式')->display(function ($heating) {
+            return HousingHeating::getDescription($heating);
+        });
         $grid->column('special', __('Special'));
         $grid->column('extra', __('Extra'));
-        $grid->column('desc', __('Desc'));
-        $grid->column('image', __('Image'));
-        $grid->column('is_delete', __('Is delete'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('created_at', '创建时间');
+        $grid->column('updated_at', '更新时间');
 
         return $grid;
     }
 
-    /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(Housing::findOrFail($id));
-
-        $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('title', __('Title'));
-        $show->field('rent', __('Rent'));
-        $show->field('floor', __('Floor'));
-        $show->field('space', __('Space'));
-        $show->field('type', __('Type'));
-        $show->field('house_type', __('House type'));
-        $show->field('toward', __('Toward'));
-        $show->field('province', __('Province'));
-        $show->field('city', __('City'));
-        $show->field('district', __('District'));
-        $show->field('address', __('Address'));
-        $show->field('heating', __('Heating'));
-        $show->field('special', __('Special'));
-        $show->field('extra', __('Extra'));
-        $show->field('desc', __('Desc'));
-        $show->field('image', __('Image'));
-        $show->field('is_delete', __('Is delete'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
-
-        return $show;
-    }
-
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
     protected function form()
     {
         $form = new Form(new Housing());

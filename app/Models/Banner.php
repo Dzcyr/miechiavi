@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Encore\Admin\Traits\DefaultDatetimeFormat;
 
 class Banner extends Model
 {
+    use DefaultDatetimeFormat;
+    
     protected $fillable = [
         'title', 'type', 'image', 'desc', 'rank', 'is_delete'
     ];
-
+    
     public function getImageUrlAttribute()
     {
         // 如果 image 字段本身就已经是完整的 url 就直接返回
