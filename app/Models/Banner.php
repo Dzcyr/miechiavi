@@ -7,16 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
 {
-    const TYPE_DEFAULT = 1;
-    const TYPE_NOTICE = 2;
-    const TYPE_CONSULT = 3;
-
-    public static $typeMap = [
-        self::TYPE_DEFAULT   => '默认',
-        self::TYPE_NOTICE => '通知',
-        self::TYPE_CONSULT  => '咨询',
-    ];
-
     protected $fillable = [
         'title', 'type', 'image', 'desc', 'rank', 'is_delete'
     ];
