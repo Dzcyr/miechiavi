@@ -184,5 +184,9 @@ return [
 
     // 扩展所在的目录
     'extensions' => [
+        'china-distpicker' => [
+            // 如果要关掉这个扩展，设置为false
+            'enable' => true,
+        ]
     ],
 ];

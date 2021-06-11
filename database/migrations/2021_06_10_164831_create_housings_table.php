@@ -19,9 +19,9 @@ class CreateHousingsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->comment('用户ID');
             $table->string('title')->comment('标题');
-            $table->decimal('rent', 10, 2)->comment('租金');
+            $table->decimal('rent', 10, 2)->comment('租金(€)');
             $table->integer('floor')->comment('楼层');
-            $table->decimal('space', 10, 2)->comment('房屋面积');
+            $table->decimal('space', 10, 2)->comment('房屋面积(㎡)');
             $table->tinyInteger('type')->unsigned()->comment('租房类型');
             $table->tinyInteger('house_type')->unsigned()->comment('户型');
             $table->tinyInteger('toward')->unsigned()->comment('朝向');

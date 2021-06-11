@@ -12,6 +12,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jacobcyl/ali-oss-storage": "^2.1",
+        "laravel-admin-ext/china-distpicker": "v1.4.1",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "overtrue/laravel-lang": "^5.0",
