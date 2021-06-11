@@ -22,12 +22,12 @@ class CreateHousingsTable extends Migration
             $table->decimal('space', 10, 2)->comment('房屋面积');
             $table->tinyInteger('type')->unsigned()->default(1)->comment('租房类型');
             $table->tinyInteger('house_type')->unsigned()->default(1)->comment('户型');
-            $table->tinyInteger('toward')->unsigned()->default(1)->comment('户型');
+            $table->tinyInteger('toward')->unsigned()->default(1)->comment('朝向');
             $table->string('province')->comment('省');
             $table->string('city')->comment('市');
             $table->string('district')->comment('区');
             $table->string('address')->comment('详细地址');
-            $table->tinyInteger('heating')->unsigned()->default(1)->comment('供暖');
+            $table->tinyInteger('heating')->unsigned()->default(1)->comment('供暖方式');
             $table->string('special')->comment('特色');
             $table->string('extra')->comment('配套设施');
             $table->text('desc')->comment('详情');
