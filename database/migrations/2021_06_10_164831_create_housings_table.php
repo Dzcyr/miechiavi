@@ -30,8 +30,8 @@ class CreateHousingsTable extends Migration
             $table->string('district')->comment('区');
             $table->string('address')->comment('详细地址');
             $table->tinyInteger('heating')->unsigned()->comment('供暖方式');
-            $table->string('special')->comment('特色');
-            $table->string('extra')->comment('配套设施');
+            $table->string('special')->nullable()->comment('特色');
+            $table->string('extra')->nullable()->comment('配套设施');
             $table->text('desc')->comment('详情');
             $table->text('image')->comment('图片');
             $table->tinyInteger('is_delete')->unsigned()->default(IsDelete::NOT_YET)->comment('是否删除');

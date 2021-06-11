@@ -5,7 +5,6 @@ namespace App\Admin\Controllers;
 use App\Models\Banner;
 
 use App\Enums\BannerType;
-use BenSampo\Enum\Rules\EnumValue;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

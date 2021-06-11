@@ -19,8 +19,6 @@ class HousingRequest extends FormRequest
             'district' => 'required',
             'address' => 'required',
             'heating' => 'required',
-            'special' => 'required',
-            'extra' => 'required',
             'desc' => 'required',
             'image' => 'required'
         ];
@@ -41,8 +39,6 @@ class HousingRequest extends FormRequest
             'district' => '区',
             'address' => '详细地址',
             'heating' => '供暖方式',
-            'special' => '特色',
-            'extra' => '配套设施',
             'desc' => '详情',
             'image' => '图片'
         ];
