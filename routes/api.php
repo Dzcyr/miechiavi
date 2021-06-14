@@ -17,6 +17,9 @@ Route::prefix('v1')->group(function () {
         // 登录后可以访问的接口
         Route::middleware('api.refresh')->group(function () {
             Route::apiResource('housings', HousingsController::class);
+            // 收藏房源
+            Route::post('housings/{housing}/favorite', [HousingsController::class, 'favor']);
+            Route::delete('housings/{housing}/favorite', [HousingsController::class, 'disfavor']);
         });
 
         // 轮播图

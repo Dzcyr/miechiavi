@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Housing;
+use Illuminate\Http\Request;
 use App\Http\Requests\Api\HousingRequest;
 use App\Http\Resources\HousingResource;
 use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra};
+
 
 class HousingsController extends Controller
 {
@@ -51,5 +53,22 @@ class HousingsController extends Controller
         $housing->user_id = $user->id;
         $housing->save();
         return $this->success(new HousingResource($housing));
+    }
+
+    public function favor(Housing $housing, Request $request)
+    {
+        $user = $request->user();
+        if (!$user->favoriteHousings()->find($housing->id)) {
+            $user->favoriteHousings()->attach($housing);
+        }
+        return $this->success([]);
+    }
+
+    public function disfavor(Housing $housing, Request $request)
+    {
+        $user = $request->user();
+        $user->favoriteHousings()->detach($housing);
+
+        return $this->success([]);
     }
 }
