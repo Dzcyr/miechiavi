@@ -33,7 +33,10 @@ class CreateHousingsTable extends Migration
             $table->string('special')->nullable()->comment('特色');
             $table->string('extra')->nullable()->comment('配套设施');
             $table->text('desc')->comment('详情');
-            $table->text('image')->comment('图片');
+            $table->text('bedroom_images')->comment('卧室图片');
+            $table->text('parlour_images')->comment('客厅图片');
+            $table->text('kitchen_images')->comment('厨房图片');
+            $table->text('toilet_images')->comment('公共卫生间图片');
             $table->tinyInteger('is_delete')->unsigned()->default(IsDelete::NOT_YET)->comment('是否删除');
             $table->timestamps();
         });

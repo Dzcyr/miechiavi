@@ -36,15 +36,19 @@ class HousingsController extends AdminController
         $grid->toward('朝向')->display(function ($toward) {
             return HousingToward::getDescription($toward);
         });
-        $grid->province('省');
-        $grid->city('市');
-        $grid->district('区');
+        $grid->province('省')->display(function ($province) {
+            return config('position.province.' . $province);
+        });
+        $grid->city('市')->display(function ($city) {
+            return config('position.city.' . $this->province . '.' . $city);
+        });
+        $grid->district('区')->display(function ($district) {
+            return config('position.district.' . $this->city . '.' . $district);
+        });
         $grid->address('详细地址');
         $grid->heating('供暖方式')->display(function ($heating) {
             return HousingHeating::getDescription($heating);
         });
-        $grid->column('special', __('Special'));
-        $grid->column('extra', __('Extra'));
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
 
@@ -69,8 +73,26 @@ class HousingsController extends AdminController
         $form->multipleSelect('special', '特色')->options(HousingSpecial::asSelectArray());
         $form->multipleSelect('extra', '配套设施')->options(HousingExtra::asSelectArray());
         $form->editor('desc', '详情')->rules('required');
-        $form->multipleImage('image', '图片')->move('housings/images')->uniqueName()->rules('required|image');;
-
+        $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move('housings/bedroom_images')->uniqueName()->rules(function ($form) {
+            if ((!$form->model()->id)) {
+                return 'required|image';
+            }
+        });
+        $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move('housings/parlour_images')->uniqueName()->rules(function ($form) {
+            if ((!$form->model()->id)) {
+                return 'required|image';
+            }
+        });
+        $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move('housings/kitchen_images')->uniqueName()->rules(function ($form) {
+            if ((!$form->model()->id)) {
+                return 'required|image';
+            }
+        });
+        $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move('housings/toilet_images')->uniqueName()->rules(function ($form) {
+            if ((!$form->model()->id)) {
+                return 'required|image';
+            }
+        });
         return $form;
     }
 }
