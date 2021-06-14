@@ -44,7 +44,10 @@ class HousingsController extends Controller
     {
         $user = auth('api')->user();
         $housing->fill($request->all());
-        $housing->image = json_encode($housing->image, 256);
+        $housing->bedroom_images = json_encode($housing->bedroom_images, 256);
+        $housing->parlour_images = json_encode($housing->parlour_images, 256);
+        $housing->kitchen_images = json_encode($housing->kitchen_images, 256);
+        $housing->toilet_images = json_encode($housing->toilet_images, 256);
         $housing->user_id = $user->id;
         $housing->save();
         return $this->success(new HousingResource($housing));
