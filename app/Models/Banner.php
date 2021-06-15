@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 class Banner extends Model
 {
     protected $fillable = [
-        'title', 'type', 'image', 'desc', 'rank', 'is_delete'
+        'title', 'type', 'image', 'desc', 'rank'
     ];
     
     public function getImageUrlAttribute()

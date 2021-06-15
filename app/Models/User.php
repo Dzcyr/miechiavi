@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements JWTSubject
 {
     protected $fillable = [
-        'weapp_openid', 'weixin_session_key', 'nickname', 'avatar', 'gender', 'is_delete'
+        'weapp_openid', 'weixin_session_key', 'nickname', 'avatar', 'gender'
     ];
 
     public function getJWTIdentifier()

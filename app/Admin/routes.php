@@ -15,6 +15,10 @@ Route::group([
 
     // 用户
     $router->get('users', 'UsersController@index');
+    // 用户 收藏房源
+    $router->get('user-favorite-housings', 'UserFavoriteHousingsController@index');
+    // 用户 查看记录
+    $router->get('user-view-housings', 'UserViewHousingsController@index');
 
     // 轮播图
     $router->get('banners', 'BannersController@index');
