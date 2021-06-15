@@ -20,7 +20,10 @@ class HousingRequest extends FormRequest
             'address' => 'required',
             'heating' => 'required',
             'desc' => 'required',
-            'image' => 'required'
+            'bedroom_images' => 'required',
+            'parlour_images' => 'required',
+            'kitchen_images' => 'required',
+            'toilet_images' => 'required'
         ];
     }
 
@@ -40,7 +43,10 @@ class HousingRequest extends FormRequest
             'address' => '详细地址',
             'heating' => '供暖方式',
             'desc' => '详情',
-            'image' => '图片'
+            'bedroom_images' => '卧室图片',
+            'parlour_images' => '客厅图片',
+            'kitchen_images' => '厨房图片',
+            'toilet_images' => '公共卫生间图片'
         ];
     }
 }

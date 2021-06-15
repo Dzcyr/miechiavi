@@ -12,7 +12,7 @@ use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, Hou
 class HousingsController extends Controller
 {
     /**
-     * 下拉框条件
+     * 下拉框列表
      *
      * @Author 佟飞
      * @DateTime 2021-06-14
@@ -46,10 +46,6 @@ class HousingsController extends Controller
     {
         $user = auth('api')->user();
         $housing->fill($request->all());
-        $housing->bedroom_images = json_encode($housing->bedroom_images, 256);
-        $housing->parlour_images = json_encode($housing->parlour_images, 256);
-        $housing->kitchen_images = json_encode($housing->kitchen_images, 256);
-        $housing->toilet_images = json_encode($housing->toilet_images, 256);
         $housing->user_id = $user->id;
         $housing->save();
         return $this->success(new HousingResource($housing));
