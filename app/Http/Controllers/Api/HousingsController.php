@@ -21,24 +21,25 @@ class HousingsController extends Controller
     public function select()
     {
         return $this->success([
-            'type' => $this->format(HousingType::asSelectArray()),
-            'house_type' => $this->format(HousingHouseType::asSelectArray()),
-            'toward' => $this->format(HousingToward::asSelectArray()),
             'multiArray' => [
-                config('position.province'),
-                array_slice(config('position.city'), 0, 1),
-                array_slice(config('position.district'), 0, 1)
+                $this->format(config('position.province')),
+                $this->format(array_slice(config('position.city'), 0, 1)[0]),
+                $this->format(array_slice(config('position.district'), 0, 1)[0])
             ],
             'region' => [
                 'milan' => [
-                    array_slice(config('position.city'), 1, 1),
-                    array_slice(config('position.district'), 1, 1)
+                    $this->format(array_slice(config('position.city'), 1, 1)[0]),
+                    $this->format(array_slice(config('position.district'), 1, 1)[0])
                 ],
                 'luoma' => [
-                    array_slice(config('position.city'), 2, 1),
-                    array_slice(config('position.district'), 2, 1)
+                    $this->format(array_slice(config('position.city'), 2, 1)[0]),
+                    $this->format(array_slice(config('position.district'), 2, 1)[0])
                 ],
             ],
+            'type' => $this->format(HousingType::asSelectArray()),
+            'house_type' => $this->format(HousingHouseType::asSelectArray()),
+            'toward' => $this->format(HousingToward::asSelectArray()),
+
             'heating' => $this->format(HousingHeating::asSelectArray()),
             'special' => $this->format(HousingSpecial::asSelectArray()),
             'extra' => $this->format(HousingExtra::asSelectArray()),
