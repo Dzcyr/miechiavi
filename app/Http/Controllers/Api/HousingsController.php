@@ -24,9 +24,21 @@ class HousingsController extends Controller
             'type' => $this->format(HousingType::asSelectArray()),
             'house_type' => $this->format(HousingHouseType::asSelectArray()),
             'toward' => $this->format(HousingToward::asSelectArray()),
-            // 'province' => config('position.province'),
-            // 'city' => config('position.city'),
-            // 'district' => config('position.district'),
+            'multiArray' => [
+                config('position.province'),
+                array_slice(config('position.city'), 0, 1),
+                array_slice(config('position.district'), 0, 1)
+            ],
+            'region' => [
+                'milan' => [
+                    array_slice(config('position.city'), 1, 1),
+                    array_slice(config('position.district'), 1, 1)
+                ],
+                'luoma' => [
+                    array_slice(config('position.city'), 2, 1),
+                    array_slice(config('position.district'), 2, 1)
+                ],
+            ],
             'heating' => $this->format(HousingHeating::asSelectArray()),
             'special' => $this->format(HousingSpecial::asSelectArray()),
             'extra' => $this->format(HousingExtra::asSelectArray()),
