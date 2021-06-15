@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BannersController;
 use App\Http\Controllers\Api\HousingsController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\ArticlesController;
+use App\Http\Controllers\Api\UsersController;
 
 Route::prefix('v1')->group(function () {
     //Route::middleware('throttle:' . config('api.rate_limits.sign'))->group(function () {
@@ -17,6 +18,8 @@ Route::prefix('v1')->group(function () {
     Route::middleware('throttle:' . config('api.rate_limits.access'))->group(function () {
         // 登录后可以访问的接口
         Route::middleware('api.refresh')->group(function () {
+            // 更新用户信息
+            Route::put('user', [UsersController::class, 'update']);
             // 房源下拉框列表
             Route::get('housings/select', [HousingsController::class, 'select']);
             // 收藏房源
@@ -28,6 +31,8 @@ Route::prefix('v1')->group(function () {
             // 上传图片
             Route::post('images', [ImageController::class, 'store']);
         });
+        // 我的
+        Route::get('mine', [UsersController::class, 'mine']);
         // 轮播图
         Route::get('banners', [BannersController::class, 'index']);
         // 文章
