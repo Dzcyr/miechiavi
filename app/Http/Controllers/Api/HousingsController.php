@@ -21,15 +21,15 @@ class HousingsController extends Controller
     public function select()
     {
         return $this->success([
-            'type' => HousingType::asSelectArray(),
-            'house_type' => HousingHouseType::asSelectArray(),
-            'toward' => HousingToward::asSelectArray(),
-            'province' => config('position.province'),
-            'city' => config('position.city'),
-            'district' => config('position.district'),
-            'heating' => HousingHeating::asSelectArray(),
-            'special' => HousingSpecial::asSelectArray(),
-            'extra' => HousingExtra::asSelectArray(),
+            'type' => $this->format(HousingType::asSelectArray()),
+            'house_type' => $this->format(HousingHouseType::asSelectArray()),
+            'toward' => $this->format(HousingToward::asSelectArray()),
+            // 'province' => config('position.province'),
+            // 'city' => config('position.city'),
+            // 'district' => config('position.district'),
+            'heating' => $this->format(HousingHeating::asSelectArray()),
+            'special' => $this->format(HousingSpecial::asSelectArray()),
+            'extra' => $this->format(HousingExtra::asSelectArray()),
         ]);
     }
 
@@ -50,7 +50,7 @@ class HousingsController extends Controller
         ));
     }
 
-    
+
     /**
      * 新增房源信息
      *
@@ -86,7 +86,7 @@ class HousingsController extends Controller
         }
         return $this->success(new HousingResource($housing));
     }
-    
+
     /**
      * 收藏房源
      *
@@ -120,5 +120,13 @@ class HousingsController extends Controller
         $user->favoriteHousings()->detach($housing);
 
         return $this->success([]);
+    }
+
+    public function format($arr)
+    {
+        foreach ($arr as $k => $v) {
+            $res[] = ['id' => $k, 'name' => $v];
+        }
+        return ($res) ?? [];
     }
 }
