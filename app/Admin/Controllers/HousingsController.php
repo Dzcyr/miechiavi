@@ -8,6 +8,7 @@ use App\Models\User;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Storage;
 use Encore\Admin\Controllers\AdminController;
 
 use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra};
@@ -49,6 +50,49 @@ class HousingsController extends AdminController
         $grid->heating('供暖方式')->display(function ($heating) {
             return HousingHeating::getDescription($heating);
         });
+        $grid->special('特色')->display(function ($specials) {
+            $arr = [];
+            foreach ($specials as $v) {
+                $arr[] = HousingSpecial::getDescription($v);
+            }
+            return $arr;
+        })->implode(',');
+        $grid->extra('配套设施')->display(function ($extras) {
+            $arr = [];
+            foreach ($extras as $v) {
+                $arr[] = HousingExtra::getDescription($v);
+            }
+            return $arr;
+        })->implode(',');
+        $grid->bedroom_images('卧室图片')->display(function ($images) {
+            $arr = [];
+            foreach ($images as $v) {
+                $arr[] = Storage::url($v);
+            }
+            return $arr;
+        })->image('', 100, 100);
+        $grid->parlour_images('客厅图片')->display(function ($images) {
+            $arr = [];
+            foreach ($images as $v) {
+                $arr[] = Storage::url($v);
+            }
+            return $arr;
+        })->image('', 100, 100);
+        $grid->kitchen_images('厨房图片')->display(function ($images) {
+            $arr = [];
+            foreach ($images as $v) {
+                $arr[] = Storage::url($v);
+            }
+            return $arr;
+        })->image('', 100, 100);
+        $grid->toilet_images('公共卫生间图片')->display(function ($images) {
+            $arr = [];
+            foreach ($images as $v) {
+                $arr[] = Storage::url($v);
+            }
+            return $arr;
+        })->image('', 100, 100);
+
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
 

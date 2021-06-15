@@ -34,6 +34,24 @@ class HousingsController extends Controller
     }
 
     /**
+     * 房源列表
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-15
+     * @param UserAddress $userAddress
+     * @return void
+     */
+    public function index(Housing $housing)
+    {
+        HousingResource::wrap('data');
+        $user = auth('api')->user();
+        return $this->success(HousingResource::collection(
+            $housing::where('user_id', $user->id)->recent()->get()
+        ));
+    }
+
+    
+    /**
      * 新增房源信息
      *
      * @Author 佟飞
@@ -51,6 +69,28 @@ class HousingsController extends Controller
         return $this->success(new HousingResource($housing));
     }
 
+    /**
+     * 房源详情
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-15
+     * @param Housing $housing
+     * @return void
+     */
+    public function show(Housing $housing)
+    {
+        return $this->success(new HousingResource($housing));
+    }
+    
+    /**
+     * 收藏房源
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-15
+     * @param Housing $housing
+     * @param Request $request
+     * @return void
+     */
     public function favor(Housing $housing, Request $request)
     {
         $user = $request->user();
@@ -60,6 +100,15 @@ class HousingsController extends Controller
         return $this->success([]);
     }
 
+    /**
+     * 取消收藏房源
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-15
+     * @param Housing $housing
+     * @param Request $request
+     * @return void
+     */
     public function disfavor(Housing $housing, Request $request)
     {
         $user = $request->user();
