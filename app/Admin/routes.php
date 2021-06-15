@@ -22,9 +22,12 @@ Route::group([
     $router->post('banners', 'BannersController@store');
     $router->get('banners/{id}/edit', 'BannersController@edit');
     $router->put('banners/{id}', 'BannersController@update');
-
+    
     // 房源
     $router->resource('housings', HousingsController::class);
+
+    // 文章
+    $router->resource('articles', ArticlesController::class);
 
     // 编辑器上传
     $router->post('editor/image', 'EditorController@image');

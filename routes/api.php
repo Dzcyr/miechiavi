@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\BannersController;
 use App\Http\Controllers\Api\HousingsController;
 use App\Http\Controllers\Api\ImageController;
+use App\Http\Controllers\Api\ArticlesController;
 
 Route::prefix('v1')->group(function () {
     //Route::middleware('throttle:' . config('api.rate_limits.sign'))->group(function () {
@@ -29,5 +30,7 @@ Route::prefix('v1')->group(function () {
         });
         // 轮播图
         Route::get('banners', [BannersController::class, 'index']);
+        // 文章
+        Route::get('articles/{article}', [ArticlesController::class, 'show']);
     });
 });
