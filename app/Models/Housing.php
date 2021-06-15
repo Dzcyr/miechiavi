@@ -2,13 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-use Encore\Admin\Traits\DefaultDatetimeFormat;
-
 class Housing extends Model
 {
-    use DefaultDatetimeFormat;
-
     protected $fillable = [
         'user_id', 'title', 'rent', 'floor', 'space', 'type',
         'house_type', 'toward', 'province', 'city', 'district',
@@ -72,7 +67,6 @@ class Housing extends Model
             $this->attributes['kitchen_images'] = json_encode($images);
         }
     }
-
     public function getKitchenImagesAttribute($images)
     {
         return json_decode($images, true);

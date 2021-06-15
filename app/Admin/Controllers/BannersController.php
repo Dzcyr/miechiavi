@@ -20,6 +20,8 @@ class BannersController extends AdminController
 
         $grid->filter(function($filter){
             $filter->like('title', '标题');
+            // 范围过滤器，调用模型的`onlyTrashed`方法，查询出被软删除的数据。
+            $filter->scope('trashed', '回收站')->onlyTrashed();
         });
 
         $grid->model()->orderBy('rank', 'asc');

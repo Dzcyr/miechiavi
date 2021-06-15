@@ -4,6 +4,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use App\Admin\Extensions\WangEditor;
 use App\Admin\Actions\Post\Restore;
+use App\Admin\Actions\Post\BatchRestore;
 
 /**
  * Laravel-admin - admin builder based on Laravel.
@@ -29,11 +30,16 @@ Form::extend('editor', WangEditor::class);
 
 // 表格初始化
 Grid::init(function (Grid $grid) {
-    $grid->disableRowSelector();
-    $grid->actions(function (Grid\Displayers\Actions $actions) {
+    // $grid->disableRowSelector();
+    $grid->actions(function ($actions) {
         $actions->disableView();
         if (\request('_scope_') == 'trashed') {
             $actions->add(new Restore());
+        }
+    });
+    $grid->batchActions(function ($batch) {
+        if (\request('_scope_') == 'trashed') {
+            $batch->add(new BatchRestore());
         }
     });
 });

@@ -22,6 +22,12 @@ class HousingsController extends AdminController
     {
         $grid = new Grid(new Housing());
 
+        $grid->filter(function($filter){
+            $filter->like('title', '标题');
+            // 范围过滤器，调用模型的`onlyTrashed`方法，查询出被软删除的数据。
+            $filter->scope('trashed', '回收站')->onlyTrashed();
+        });
+        
         $grid->id('ID')->sortable();
         $grid->user()->nickname('所属用户')->copyable();
         $grid->title('标题')->editable()->copyable();

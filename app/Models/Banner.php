@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Support\Str;
-use Encore\Admin\Traits\DefaultDatetimeFormat;
 
 class Banner extends Model
 {
-    use DefaultDatetimeFormat;
-    
     protected $fillable = [
         'title', 'type', 'image', 'desc', 'rank', 'is_delete'
     ];
