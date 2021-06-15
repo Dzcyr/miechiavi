@@ -3,8 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\User;
-use App\Models\Product;
-use App\Models\Payment;
+use App\Models\Housing;
 use Encore\Admin\Layout\Row;
 use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
@@ -21,6 +20,9 @@ class HomeController extends Controller
             ->row(function (Row $row) {
                 $row->column(4, function (Column $column) {
                     $column->append($this->InfoBox('用户数量', 'users', 'aqua', '/admin/users', User::get()->count()));
+                });
+                $row->column(4, function (Column $column) {
+                    $column->append($this->InfoBox('房源数量', 'housings', 'red', '/admin/housings', Housing::get()->count()));
                 });
             });
     }
