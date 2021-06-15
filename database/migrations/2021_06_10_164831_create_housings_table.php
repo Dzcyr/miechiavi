@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Enums\IsDelete;
-
 class CreateHousingsTable extends Migration
 {
     /**
@@ -37,7 +35,7 @@ class CreateHousingsTable extends Migration
             $table->text('parlour_images')->comment('客厅图片');
             $table->text('kitchen_images')->comment('厨房图片');
             $table->text('toilet_images')->comment('公共卫生间图片');
-            $table->tinyInteger('is_delete')->unsigned()->default(IsDelete::NOT_YET)->comment('是否删除');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

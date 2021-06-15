@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Enums\IsDelete;
-
 class CreateUsersTable extends Migration
 {
     /**
@@ -22,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('nickname')->nullable()->comment('昵称');
             $table->string('avatar')->nullable()->comment('头像');
             $table->tinyInteger('gender')->unsigned()->nullable()->comment('性别');
-            $table->tinyInteger('is_delete')->unsigned()->default(IsDelete::NOT_YET)->comment('是否删除');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

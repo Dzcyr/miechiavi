@@ -3,6 +3,7 @@
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use App\Admin\Extensions\WangEditor;
+use App\Admin\Actions\Post\Restore;
 
 /**
  * Laravel-admin - admin builder based on Laravel.
@@ -31,7 +32,9 @@ Grid::init(function (Grid $grid) {
     $grid->disableRowSelector();
     $grid->actions(function (Grid\Displayers\Actions $actions) {
         $actions->disableView();
-        $actions->disableDelete();
+        if (\request('_scope_') == 'trashed') {
+            $actions->add(new Restore());
+        }
     });
 });
 
