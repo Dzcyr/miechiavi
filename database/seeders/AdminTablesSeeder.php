@@ -28,7 +28,7 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 0,
-                    "order" => 6,
+                    "order" => 9,
                     "title" => "系统管理",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
@@ -36,7 +36,7 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 2,
-                    "order" => 7,
+                    "order" => 10,
                     "title" => "管理员",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
@@ -44,7 +44,7 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 2,
-                    "order" => 8,
+                    "order" => 11,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
@@ -52,7 +52,7 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 2,
-                    "order" => 9,
+                    "order" => 12,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
@@ -60,7 +60,7 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 2,
-                    "order" => 10,
+                    "order" => 13,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
@@ -68,23 +68,23 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 2,
-                    "order" => 11,
+                    "order" => 14,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 0,
-                    "order" => 3,
-                    "title" => "用户管理",
+                    "parent_id" => 13,
+                    "order" => 4,
+                    "title" => "用户列表",
                     "icon" => "fa-users",
                     "uri" => "/users",
                     "permission" => NULL
                 ],
                 [
                     "parent_id" => 0,
-                    "order" => 4,
+                    "order" => 7,
                     "title" => "轮播图",
                     "icon" => "fa-file-picture-o",
                     "uri" => "/banners",
@@ -100,10 +100,34 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 0,
-                    "order" => 5,
+                    "order" => 8,
                     "title" => "文章列表",
                     "icon" => "fa-book",
                     "uri" => "/articles",
+                    "permission" => NULL
+                ],
+                [
+                    "parent_id" => 13,
+                    "order" => 5,
+                    "title" => "收藏房源列表",
+                    "icon" => "fa-th-large",
+                    "uri" => "user-favorite-housings",
+                    "permission" => NULL
+                ],
+                [
+                    "parent_id" => 0,
+                    "order" => 3,
+                    "title" => "用户管理",
+                    "icon" => "fa-user",
+                    "uri" => NULL,
+                    "permission" => NULL
+                ],
+                [
+                    "parent_id" => 13,
+                    "order" => 6,
+                    "title" => "查看房源记录",
+                    "icon" => "fa-history",
+                    "uri" => "/user-view-housings",
                     "permission" => NULL
                 ]
             ]
