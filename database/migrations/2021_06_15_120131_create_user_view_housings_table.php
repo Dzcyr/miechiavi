@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 use App\Enums\IsDelete;
 
-class CreateUserFavoriteHousingsTable extends Migration
+class CreateUserViewHousingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateUserFavoriteHousingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_favorite_housings', function (Blueprint $table) {
+        Schema::create('user_view_housings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->comment('用户ID');
             $table->unsignedBigInteger('housing_id')->comment('房源ID');
@@ -31,6 +31,6 @@ class CreateUserFavoriteHousingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_favorite_housings');
+        Schema::dropIfExists('user_view_housings');
     }
 }

@@ -77,8 +77,13 @@ class HousingsController extends Controller
      * @param Housing $housing
      * @return void
      */
-    public function show(Housing $housing)
+    public function show(Housing $housing, Request $request)
     {
+        // 添加到观看记录中
+        $user = $request->user();
+        if (!$user->viewHousings()->find($housing->id)) {
+            $user->viewHousings()->attach($housing);
+        }
         return $this->success(new HousingResource($housing));
     }
     

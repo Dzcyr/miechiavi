@@ -23,11 +23,18 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
+    
     public function favoriteHousings()
     {
         return $this->belongsToMany(Housing::class, 'user_favorite_housings')
             ->withTimestamps()
             ->orderBy('user_favorite_housings.created_at', 'desc');
+    }
+
+    public function viewHousings()
+    {
+        return $this->belongsToMany(Housing::class, 'user_view_housings')
+            ->withTimestamps()
+            ->orderBy('user_view_housings.created_at', 'desc');
     }
 }
