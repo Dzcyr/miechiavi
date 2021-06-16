@@ -85,7 +85,7 @@ class AdminTablesSeeder extends Seeder
                 [
                     "parent_id" => 0,
                     "order" => 7,
-                    "title" => "轮播图",
+                    "title" => "轮播图列表",
                     "icon" => "fa-file-picture-o",
                     "uri" => "/banners",
                     "permission" => NULL
@@ -125,7 +125,7 @@ class AdminTablesSeeder extends Seeder
                 [
                     "parent_id" => 13,
                     "order" => 6,
-                    "title" => "查看房源记录",
+                    "title" => "查看房源记录列表",
                     "icon" => "fa-history",
                     "uri" => "/user-view-housings",
                     "permission" => NULL
@@ -165,6 +165,42 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "auth.management",
                     "http_method" => "",
                     "http_path" => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs"
+                ],
+                [
+                    "name" => "房源列表",
+                    "slug" => "housings",
+                    "http_method" => "",
+                    "http_path" => "/housings"
+                ],
+                [
+                    "name" => "用户列表",
+                    "slug" => "users",
+                    "http_method" => "",
+                    "http_path" => "/users"
+                ],
+                [
+                    "name" => "收藏房源列表",
+                    "slug" => "user-favorite-housings",
+                    "http_method" => "",
+                    "http_path" => "/user-favorite-housings"
+                ],
+                [
+                    "name" => "查看房源记录列表",
+                    "slug" => "user-view-housings",
+                    "http_method" => "",
+                    "http_path" => "/user-view-housings"
+                ],
+                [
+                    "name" => "轮播图列表",
+                    "slug" => "banners",
+                    "http_method" => "",
+                    "http_path" => "/banners"
+                ],
+                [
+                    "name" => "文章列表",
+                    "slug" => "articles",
+                    "http_method" => "",
+                    "http_path" => "/articles"
                 ]
             ]
         );
@@ -175,6 +211,10 @@ class AdminTablesSeeder extends Seeder
                 [
                     "name" => "超级管理员",
                     "slug" => "administrator"
+                ],
+                [
+                    "name" => "运营",
+                    "slug" => "operation"
                 ]
             ]
         );
@@ -196,6 +236,34 @@ class AdminTablesSeeder extends Seeder
                 [
                     "role_id" => 1,
                     "permission_id" => 1
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 2
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 6
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 7
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 8
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 9
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 10
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 11
                 ]
             ]
         );
