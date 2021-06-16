@@ -8,14 +8,15 @@ use App\Http\Requests\Api\ImageRequest;
 
 class ImageController extends Controller
 {
-	// 上传图片
+    // 上传图片
     public function store(ImageRequest $request)
     {
         $path = Image::getDescription($request->type);
         $url = Storage::put($path, $request->image);
         return $this->success([
             'file_name' => str_replace($path . '/', '', $url),
-            'url' => Storage::url($url)
+            'url' => Storage::url($url),
+            'type' => $request->type
         ]);
     }
 }
