@@ -53,12 +53,28 @@ class HousingsController extends Controller
      * @param UserAddress $userAddress
      * @return void
      */
-    public function index(Housing $housing)
+    public function index(Request $request, Housing $housing)
     {
-        HousingResource::wrap('data');
         $user = auth('api')->user();
+        $query = $housing->query();
+        // 搜索条件
+        if ($status = $request->status) {
+            $query->where('status', $status);
+        }
+        if ($type = $request->type) {
+            $query->where('type', $type);
+        }
+        if ($province = $request->province) {
+            $query->where('province', $province);
+        }
+        if ($city = $request->city) {
+            $query->where('city', $city);
+        }
+        if ($district = $request->district) {
+            $query->where('district', $district);
+        }
         return $this->success(HousingResource::collection(
-            $housing::where('user_id', $user->id)->recent()->get()
+            $query->where('user_id', $user->id)->recent()->paginate(10)
         ));
     }
 
