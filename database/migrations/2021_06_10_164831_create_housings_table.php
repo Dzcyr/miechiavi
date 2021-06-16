@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\HousingStatus;
 
 class CreateHousingsTable extends Migration
 {
@@ -35,6 +36,7 @@ class CreateHousingsTable extends Migration
             $table->text('parlour_images')->comment('客厅图片');
             $table->text('kitchen_images')->comment('厨房图片');
             $table->text('toilet_images')->comment('公共卫生间图片');
+            $table->tinyInteger('status')->default(HousingStatus::DEFAULT)->comment('状态');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -4,15 +4,11 @@ namespace App\Admin\Controllers;
 
 use App\Models\Housing;
 use App\Models\User;
-
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Show;
 use Illuminate\Support\Facades\Storage;
 use Encore\Admin\Controllers\AdminController;
-
-use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra};
-
+use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingStatus};
 
 class HousingsController extends AdminController
 {
@@ -98,7 +94,9 @@ class HousingsController extends AdminController
             }
             return $arr;
         })->image('', 100, 100);
-
+        $grid->status('状态')->display(function ($status) {
+            return HousingStatus::getDescription($status);
+        });
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
 
@@ -143,6 +141,7 @@ class HousingsController extends AdminController
                 return 'required|image';
             }
         });
+        $form->select('status', '状态')->options(HousingStatus::asSelectArray())->rules('required');
         return $form;
     }
 }

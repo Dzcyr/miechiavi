@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Housing;
+use App\Models\UserFavoriteHousing;
+use App\Models\UserViewHousing;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\Api\UserRequest;
 
@@ -15,13 +17,15 @@ class UsersController extends Controller
         $path = 'other/mine/';
 
         $housingNum = $this->getHousingNum();
-
+        $favoriteNum = $this->getFavoriteNum();
+        $viewNum = $this->getViewNum();
+        
         return $this->success([
             // 'bg' => $storage->url($path.'bg.png'),
             'housings' => [
-                ['id' => 1, 'title' => '收藏', 'type' => 'sc', 'dot' => (bool) 0, 'number' => 0],
-                ['id' => 2, 'title' => '合同', 'type' => 'ht', 'dot' => (bool) 0, 'number' => 0],
-                ['id' => 3, 'title' => '浏览', 'type' => 'll', 'dot' => (bool) 0, 'number' => 0],
+                ['id' => 1, 'title' => '收藏', 'type' => 'sc', 'dot' => (bool) $favoriteNum, 'number' => $favoriteNum],
+                ['id' => 2, 'title' => '合同', 'type' => 'ht', 'dot' => (bool) 1, 'number' => 1],
+                ['id' => 3, 'title' => '浏览', 'type' => 'll', 'dot' => (bool) $viewNum, 'number' => $viewNum],
                 ['id' => 4, 'title' => '房间', 'type' => 'fj', 'dot' => (bool) $housingNum, 'number' => $housingNum]
             ],
             'tools' => [
@@ -48,5 +52,15 @@ class UsersController extends Controller
     public function getHousingNum() {
         $user = auth('api')->user();
         return ($user) ? Housing::where('user_id', $user->id)->count() : 0;
+    }
+
+    public function getFavoriteNum() {
+        $user = auth('api')->user();
+        return ($user) ? UserFavoriteHousing::where('user_id', $user->id)->count() : 0;
+    }
+
+    public function getViewNum() {
+        $user = auth('api')->user();
+        return ($user) ? UserViewHousing::where('user_id', $user->id)->count() : 0;
     }
 }
