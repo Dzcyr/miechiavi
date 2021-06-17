@@ -8,7 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Illuminate\Support\Facades\Storage;
 use Encore\Admin\Controllers\AdminController;
-use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingStatus};
+use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingStatus, Image};
 
 class HousingsController extends AdminController
 {
@@ -18,12 +18,12 @@ class HousingsController extends AdminController
     {
         $grid = new Grid(new Housing());
 
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             $filter->like('title', '标题');
             // 范围过滤器，调用模型的`onlyTrashed`方法，查询出被软删除的数据。
             $filter->scope('trashed', '回收站')->onlyTrashed();
         });
-        
+
         $grid->id('ID')->sortable();
         $grid->user()->nickname('所属用户')->copyable();
         $grid->title('标题')->editable()->copyable();
@@ -121,22 +121,22 @@ class HousingsController extends AdminController
         $form->multipleSelect('special', '特色')->options(HousingSpecial::asSelectArray());
         $form->multipleSelect('extra', '配套设施')->options(HousingExtra::asSelectArray());
         $form->editor('desc', '详情')->rules('required');
-        $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move('housings/bedroom_images')->uniqueName()->rules(function ($form) {
+        $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_BEDROOM_IMAGES)))->uniqueName()->rules(function ($form) {
             if ((!$form->model()->id)) {
                 return 'required|image';
             }
         });
-        $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move('housings/parlour_images')->uniqueName()->rules(function ($form) {
+        $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_PARLOUR_IMAGES)))->uniqueName()->rules(function ($form) {
             if ((!$form->model()->id)) {
                 return 'required|image';
             }
         });
-        $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move('housings/kitchen_images')->uniqueName()->rules(function ($form) {
+        $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_KITCHEN_IMAGES)))->uniqueName()->rules(function ($form) {
             if ((!$form->model()->id)) {
                 return 'required|image';
             }
         });
-        $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move('housings/toilet_images')->uniqueName()->rules(function ($form) {
+        $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_TOILET_IMAGES)))->uniqueName()->rules(function ($form) {
             if ((!$form->model()->id)) {
                 return 'required|image';
             }

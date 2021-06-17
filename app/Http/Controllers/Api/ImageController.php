@@ -11,10 +11,10 @@ class ImageController extends Controller
     // 上传图片
     public function store(ImageRequest $request)
     {
-        $path = Image::getDescription($request->type);
+        $path = oss_path_processing(Image::getDescription($request->type));
         $url = Storage::put($path, $request->image);
         return $this->success([
-            'file_name' => str_replace($path . '/', '', $url),
+            'file_name' => $path . '/' . str_replace($path . '/', '', $url),
             'url' => Storage::url($url),
             'type' => $request->type
         ]);
