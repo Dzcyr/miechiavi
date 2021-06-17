@@ -21,21 +21,24 @@ Route::prefix('v1')->group(function () {
             // 更新用户信息
             Route::put('user', [UsersController::class, 'update']);
             // 房源下拉框列表
-            Route::get('housings/select', [HousingsController::class, 'select']);
+            Route::post('housings/select', [HousingsController::class, 'select']);
             // 收藏房源
             Route::post('housings/{housing}/favorite', [HousingsController::class, 'favor']);
+            // 取消收藏房源
             Route::delete('housings/{housing}/favorite', [HousingsController::class, 'disfavor']);
-            // 房源
-            Route::apiResource('housings', HousingsController::class);
+            // 房源列表
+            Route::post('housings/list', [HousingsController::class, 'index']);
+            Route::post('housings/{housing}', [HousingsController::class, 'show']);
+            Route::post('housings', [HousingsController::class, 'store']);
             // 上传图片
             Route::post('images', [ImageController::class, 'store']);
         });
         // 我的
-        Route::get('mine', [UsersController::class, 'mine']);
+        Route::post('mine', [UsersController::class, 'mine']);
         // 轮播图
-        Route::get('banners', [BannersController::class, 'index']);
-        Route::get('banners/{banner}', [BannersController::class, 'show']);
+        Route::post('banners', [BannersController::class, 'index']);
+        Route::post('banners/{banner}', [BannersController::class, 'show']);
         // 文章
-        Route::get('articles/{article}', [ArticlesController::class, 'show']);
+        Route::post('articles/{article}', [ArticlesController::class, 'show']);
     });
 });
