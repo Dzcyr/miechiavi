@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Banner;
+use Illuminate\Http\Request;
 use App\Http\Resources\BannerResource;
 
 class BannersController extends Controller
@@ -15,8 +16,9 @@ class BannersController extends Controller
         ));
     }
 
-    public function show(Banner $banner)
+    public function show(Banner $banner, Request $request)
     {
-        return $this->success(new BannerResource($banner));
+        $banner = $banner->find($request->id);
+        return $this->success(!empty($banner) ? new BannerResource($banner) : []);
     }
 }

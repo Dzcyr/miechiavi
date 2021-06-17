@@ -23,12 +23,12 @@ Route::prefix('v1')->group(function () {
             // 房源下拉框列表
             Route::post('housings/select', [HousingsController::class, 'select']);
             // 收藏房源
-            Route::post('housings/{housing}/favorite', [HousingsController::class, 'favor']);
+            Route::post('housings/favorite', [HousingsController::class, 'favor']);
             // 取消收藏房源
-            Route::delete('housings/{housing}/favorite', [HousingsController::class, 'disfavor']);
+            Route::delete('housings/favorite', [HousingsController::class, 'disfavor']);
             // 房源列表
             Route::post('housings/list', [HousingsController::class, 'index']);
-            Route::post('housings/{housing}', [HousingsController::class, 'show']);
+            Route::post('housings/info', [HousingsController::class, 'show']);
             Route::post('housings', [HousingsController::class, 'store']);
             // 上传图片
             Route::post('images', [ImageController::class, 'store']);
@@ -37,8 +37,8 @@ Route::prefix('v1')->group(function () {
         Route::post('mine', [UsersController::class, 'mine']);
         // 轮播图
         Route::post('banners', [BannersController::class, 'index']);
-        Route::post('banners/{banner}', [BannersController::class, 'show']);
+        Route::post('banners/info', [BannersController::class, 'show']);
         // 文章
-        Route::post('articles/{article}', [ArticlesController::class, 'show']);
+        Route::post('articles/info', [ArticlesController::class, 'show']);
     });
 });

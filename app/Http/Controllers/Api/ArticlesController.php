@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Article;
+use Illuminate\Http\Request;
 use App\Http\Resources\ArticleResource;
 
 class ArticlesController extends Controller
 {
-    public function show(Article $article)
+    public function show(Article $article, Request $request)
     {
-        return $this->success(new ArticleResource($article));
+        $article = $article->find($request->id);
+        return $this->success(!empty($article) ? new ArticleResource($article) : []);
     }
 }

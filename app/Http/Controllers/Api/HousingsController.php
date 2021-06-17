@@ -130,12 +130,16 @@ class HousingsController extends Controller
      */
     public function show(Housing $housing, Request $request)
     {
-        // 添加到观看记录中
         $user = $request->user();
-        if (!$user->viewHousings()->find($housing->id)) {
-            $user->viewHousings()->attach($housing);
+        $housing = $housing->find($request->id);
+        if (!empty($housing)) {
+            // 添加到观看记录中
+            if (!$user->viewHousings()->find($request->id)) {
+                $user->viewHousings()->attach($housing);
+            }
+            return $this->success(new HousingResource($housing));
         }
-        return $this->success(new HousingResource($housing));
+        return $this->success([]);
     }
 
     /**
@@ -150,8 +154,11 @@ class HousingsController extends Controller
     public function favor(Housing $housing, Request $request)
     {
         $user = $request->user();
-        if (!$user->favoriteHousings()->find($housing->id)) {
-            $user->favoriteHousings()->attach($housing);
+        $housing = $housing->find($request->id);
+        if (!empty($housing)) {
+            if (!$user->favoriteHousings()->find($housing->id)) {
+                $user->favoriteHousings()->attach($housing);
+            }
         }
         return $this->success([]);
     }
@@ -168,8 +175,10 @@ class HousingsController extends Controller
     public function disfavor(Housing $housing, Request $request)
     {
         $user = $request->user();
-        $user->favoriteHousings()->detach($housing);
-
+        $housing = $housing->find($request->id);
+        if (!empty($housing)) {
+            $user->favoriteHousings()->detach($housing);
+        }
         return $this->success([]);
     }
 
