@@ -57,22 +57,45 @@ class HousingsController extends Controller
     {
         $user = auth('api')->user();
         $query = $housing->query();
-        // 搜索条件
+        // 状态
         if ($status = $request->status) {
             $query->where('status', $status);
         }
+        // 租房类型
         if ($type = $request->type) {
             $query->where('type', $type);
         }
+        // 省
         if ($province = $request->province) {
             $query->where('province', $province);
         }
+        // 市
         if ($city = $request->city) {
             $query->where('city', $city);
         }
+        // 区
         if ($district = $request->district) {
             $query->where('district', $district);
         }
+
+
+        // 房源面积(㎡)
+        if ($space = $request->space) {
+            $query->whereBetween('space', [$space[0], $space[1]]);
+        }
+        // 房源价格
+        if ($rent = $request->rent) {
+            $query->whereBetween('rent', [$rent[0], $rent[1]]);
+        }
+        // 户型
+        if ($house_type = $request->house_type) {
+            $query->where('house_type', $house_type);
+        }
+        // 供暖方式
+        if ($heating = $request->heating) {
+            $query->where('heating', $heating);
+        }
+
         return $this->success(HousingResource::collection(
             $query->where('user_id', $user->id)->recent()->paginate(10)
         ));
