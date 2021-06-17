@@ -14,7 +14,7 @@ Route::prefix('v1')->group(function () {
     // 小程序 注册登录
     Route::post('weapp/authorizations', [AuthorizationsController::class, 'weappStore']);
     //});
-    
+
     Route::middleware('throttle:' . config('api.rate_limits.access'))->group(function () {
         // 登录后可以访问的接口
         Route::middleware('api.refresh')->group(function () {
@@ -27,7 +27,6 @@ Route::prefix('v1')->group(function () {
             Route::delete('housings/{housing}/favorite', [HousingsController::class, 'disfavor']);
             // 房源
             Route::apiResource('housings', HousingsController::class);
-            
             // 上传图片
             Route::post('images', [ImageController::class, 'store']);
         });
@@ -35,6 +34,7 @@ Route::prefix('v1')->group(function () {
         Route::get('mine', [UsersController::class, 'mine']);
         // 轮播图
         Route::get('banners', [BannersController::class, 'index']);
+        Route::get('banners/{banner}', [BannersController::class, 'show']);
         // 文章
         Route::get('articles/{article}', [ArticlesController::class, 'show']);
     });

@@ -14,4 +14,9 @@ class BannersController extends Controller
             $banner::orderBy('rank', 'asc')->get()
         ));
     }
+
+    public function show(Banner $banner)
+    {
+        return $this->success(new BannerResource($banner));
+    }
 }
