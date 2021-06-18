@@ -36,6 +36,8 @@ class CreateHousingsTable extends Migration
             $table->text('parlour_images')->comment('客厅图片');
             $table->text('kitchen_images')->comment('厨房图片');
             $table->text('toilet_images')->comment('公共卫生间图片');
+            $table->decimal('longitude', 10, 7)->nullable()->comment('经度');
+            $table->decimal('latitude', 10, 7)->nullable()->comment('纬度');
             $table->tinyInteger('status')->default(HousingStatus::DEFAULT)->comment('状态');
             $table->softDeletes();
             $table->timestamps();

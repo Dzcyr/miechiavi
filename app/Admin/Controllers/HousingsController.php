@@ -94,6 +94,8 @@ class HousingsController extends AdminController
             }
             return $arr;
         })->image('', 100, 100);
+        $grid->longitude('经度');
+        $grid->latitude('纬度');
         $grid->status('状态')->display(function ($status) {
             return HousingStatus::getDescription($status);
         });

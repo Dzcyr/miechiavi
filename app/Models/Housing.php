@@ -8,7 +8,8 @@ class Housing extends Model
         'user_id', 'title', 'rent', 'floor', 'space', 'type',
         'house_type', 'toward', 'province', 'city', 'district',
         'address', 'heating', 'special', 'extra', 'desc',
-        'bedroom_images', 'parlour_images', 'kitchen_images', 'toilet_images'
+        'bedroom_images', 'parlour_images', 'kitchen_images', 'toilet_images',
+        'longitude', 'latitude', 'status'
     ];
 
     public function user()

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
-use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra};
+use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingStatus};
 
 class HousingResource extends JsonResource
 {
@@ -41,17 +41,25 @@ class HousingResource extends JsonResource
             'special' => implode('、', $specials),
             'extra' => implode('、', $extras),
             'desc' => $this->desc,
-            'bedroom_images' => $this->getImages($this->bedroom_images),
-            'parlour_images' => $this->getImages($this->parlour_images),
-            'kitchen_images' => $this->getImages($this->kitchen_images),
-            'toilet_images' => $this->getImages($this->toilet_images),
+            'bedroom_images' => $this->getImages($this->bedroom_images, '卧室'),
+            'parlour_images' => $this->getImages($this->parlour_images, '客厅'),
+            'kitchen_images' => $this->getImages($this->kitchen_images, '厨房'),
+            'toilet_images' => $this->getImages($this->toilet_images, '公共卫生间'),
+            'longitude' => $this->longitude,
+            'latitude' => $this->latitude,
+            'status' => HousingStatus::getDescription($this->status),
         ];
     }
 
-    public function getImages($images)
+    public function getImages($images, $name)
     {
+        $num = 1;
         foreach ($images as $v) {
-            $arr[] = Storage::url($v);
+            $arr[] = [
+                'id' => $num++,
+                'name' => $name,
+                'image' => Storage::url($v)
+            ];
         }
         return $arr ?? [];
     }
