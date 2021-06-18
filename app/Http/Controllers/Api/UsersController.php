@@ -7,11 +7,12 @@ use App\Models\UserFavoriteHousing;
 use App\Models\UserViewHousing;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\Api\UserRequest;
+use App\Http\Resources\HousingResource;
 
 class UsersController extends Controller
 {
     // 我的
-	public function mine()
+    public function mine()
     {
         $storage = \Storage::disk(env('FILESYSTEM_DRIVER'));
         $path = 'other/mine/';
@@ -19,7 +20,7 @@ class UsersController extends Controller
         $housingNum = $this->getHousingNum();
         $favoriteNum = $this->getFavoriteNum();
         $viewNum = $this->getViewNum();
-        
+
         return $this->success([
             // 'bg' => $storage->url($path.'bg.png'),
             'housings' => [
@@ -49,17 +50,36 @@ class UsersController extends Controller
         return $this->success(new UserResource($user));
     }
 
-    public function getHousingNum() {
+    /**
+     * 我的房源
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-18
+     * @param Housing $housing
+     * @return void
+     */
+    public function housings(Housing $housing)
+    {
+        $user = auth('api')->user();
+        return $this->success(HousingResource::collection(
+            $housing->query()->where('user_id', $user->id)->recent()->paginate(10)
+        ));
+    }
+
+    public function getHousingNum()
+    {
         $user = auth('api')->user();
         return ($user) ? Housing::where('user_id', $user->id)->count() : 0;
     }
 
-    public function getFavoriteNum() {
+    public function getFavoriteNum()
+    {
         $user = auth('api')->user();
         return ($user) ? UserFavoriteHousing::where('user_id', $user->id)->count() : 0;
     }
 
-    public function getViewNum() {
+    public function getViewNum()
+    {
         $user = auth('api')->user();
         return ($user) ? UserViewHousing::where('user_id', $user->id)->count() : 0;
     }
