@@ -14,7 +14,7 @@ class ImageRequest extends FormRequest
                 'required',
                 new EnumValue(Image::class, false)
             ],
-            'image' => 'required|mimes:jpg,jpeg,png|dimensions:min_width=200,min_height=200'
+            'image' => 'required|mimes:jpg,jpeg,png,webp|dimensions:min_width=200,min_height=200'
         ];
         return $rules;
     }
@@ -22,7 +22,7 @@ class ImageRequest extends FormRequest
     public function messages()
     {
         return [
-              'image.dimensions' => '图片的清晰度不够，宽和高需要 200px 以上',
+            'image.dimensions' => '图片的清晰度不够，宽和高需要 200px 以上',
         ];
     }
 }
