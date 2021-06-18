@@ -15,13 +15,13 @@ class UserFavoriteHousingsController extends AdminController
     {
         $grid = new Grid(new UserFavoriteHousing());
 
-        $grid->filter(function($filter){
-            $filter->like('user.nickname', '用户昵称');
-            $filter->like('housing.title', '用户昵称');
+        $grid->filter(function ($filter) {
+            $filter->like('user.weapp_openid', '所属用户');
+            $filter->like('housing.title', '房源名称');
         });
 
         $grid->id('ID')->sortable();
-        $grid->user()->nickname('用户昵称')->copyable();
+        $grid->user()->weapp_openid('所属用户')->copyable();
         $grid->housing()->title('房源名称')->copyable();
 
         // 禁用创建按钮

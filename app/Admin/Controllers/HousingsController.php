@@ -25,7 +25,7 @@ class HousingsController extends AdminController
         });
 
         $grid->id('ID')->sortable();
-        $grid->user()->nickname('所属用户')->copyable();
+        $grid->user()->weapp_openid('所属用户')->copyable();
         $grid->title('标题')->editable()->copyable();
         $grid->rent('租金(€)')->sortable();
         $grid->floor('楼层')->sortable();
