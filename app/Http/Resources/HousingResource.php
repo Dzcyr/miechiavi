@@ -41,20 +41,44 @@ class HousingResource extends JsonResource
             'address' => $this->address,
             'heating' => HousingHeating::getDescription($this->heating),
             'special' => implode('、', $specials),
-            'extra' => implode('、', $extras),
             'desc' => $this->desc,
-            'bedroom_images' => $this->getImages($this->bedroom_images, '卧室'),
-            'parlour_images' => $this->getImages($this->parlour_images, '客厅'),
-            'kitchen_images' => $this->getImages($this->kitchen_images, '厨房'),
-            'toilet_images' => $this->getImages($this->toilet_images, '公共卫生间'),
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
-            'status' => HousingStatus::getDescription($this->status),
-            'view_status' => ($view_status) ? 1 : 0
+            $this->mergeWhen(!$this->showInfoFields, [
+                'extra' => implode('、', $extras),
+                'bedroom_images' => $this->getImages($this->bedroom_images),
+                'parlour_images' => $this->getImages($this->parlour_images),
+                'kitchen_images' => $this->getImages($this->kitchen_images),
+                'toilet_images' => $this->getImages($this->toilet_images),
+            ]),
+            $this->mergeWhen($this->showInfoFields, [
+                'extra' => $this->format($extras),
+                'bedroom_images' => $this->getImagesInfo($this->bedroom_images, '卧室'),
+                'parlour_images' => $this->getImagesInfo($this->parlour_images, '客厅'),
+                'kitchen_images' => $this->getImagesInfo($this->kitchen_images, '厨房'),
+                'toilet_images' => $this->getImagesInfo($this->toilet_images, '公共卫生间'),
+                'status' => HousingStatus::getDescription($this->status),
+                'view_status' => ($view_status) ? 1 : 0,
+            ]),
         ];
     }
 
-    public function getImages($images, $name)
+    public function showInfoFields()
+    {
+        $this->showInfoFields = true;
+
+        return $this;
+    }
+
+    public function getImages($images)
+    {
+        foreach ($images as $v) {
+            $arr[] = Storage::url($v);
+        }
+        return $arr ?? [];
+    }
+
+    public function getImagesInfo($images, $name)
     {
         $num = 1;
         foreach ($images as $v) {
@@ -65,5 +89,13 @@ class HousingResource extends JsonResource
             ];
         }
         return $arr ?? [];
+    }
+
+    public function format($arr)
+    {
+        foreach ($arr as $k => $v) {
+            $res[] = ['id' => $k, 'name' => $v, 'url' => ''];
+        }
+        return ($res) ?? [];
     }
 }

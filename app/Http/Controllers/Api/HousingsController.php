@@ -136,7 +136,7 @@ class HousingsController extends Controller
             if (!$user->viewHousings()->find($request->id)) {
                 $user->viewHousings()->attach($housing);
             }
-            return $this->success(new HousingResource($housing));
+            return $this->success((new HousingResource($housing))->showInfoFields());
         }
         return $this->success([]);
     }
