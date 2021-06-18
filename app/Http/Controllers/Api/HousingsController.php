@@ -55,7 +55,6 @@ class HousingsController extends Controller
      */
     public function index(Request $request, Housing $housing)
     {
-        $user = auth('api')->user();
         $query = $housing->query();
         // 状态
         if ($status = $request->status) {
@@ -97,7 +96,7 @@ class HousingsController extends Controller
         }
 
         return $this->success(HousingResource::collection(
-            $query->where('user_id', $user->id)->recent()->paginate(10)
+            $query->recent()->paginate(10)
         ));
     }
 
