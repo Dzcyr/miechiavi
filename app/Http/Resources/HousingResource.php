@@ -24,6 +24,8 @@ class HousingResource extends JsonResource
         foreach ($this->extra as $v) {
             $extras[] = HousingExtra::getDescription($v);
         }
+        $user = $request->user();
+        $view_status = $user->favoriteHousings()->find($this->id);
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -48,6 +50,7 @@ class HousingResource extends JsonResource
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
             'status' => HousingStatus::getDescription($this->status),
+            'view_status' => ($view_status) ? 1 : 0
         ];
     }
 
