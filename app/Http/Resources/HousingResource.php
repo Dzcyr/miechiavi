@@ -22,7 +22,7 @@ class HousingResource extends JsonResource
         }
         $extras = [];
         foreach ($this->extra as $v) {
-            $extras[] = HousingSpecial::getDescription($v);
+            $extras[] = HousingExtra::getDescription($v);
         }
         return [
             'id' => $this->id,
@@ -38,8 +38,8 @@ class HousingResource extends JsonResource
             'district' => config('position.district.' . $this->city . '.' . $this->district),
             'address' => $this->address,
             'heating' => HousingHeating::getDescription($this->heating),
-            'special' => implode(',', $specials),
-            'extra' => implode(',', $extras),
+            'special' => implode('、', $specials),
+            'extra' => implode('、', $extras),
             'desc' => $this->desc,
             'bedroom_images' => $this->getImages($this->bedroom_images),
             'parlour_images' => $this->getImages($this->parlour_images),

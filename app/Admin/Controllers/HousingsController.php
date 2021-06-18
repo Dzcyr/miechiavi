@@ -58,14 +58,14 @@ class HousingsController extends AdminController
                 $arr[] = HousingSpecial::getDescription($v);
             }
             return $arr;
-        })->implode(',');
+        })->implode('、');
         $grid->extra('配套设施')->display(function ($extras) {
             $arr = [];
             foreach ($extras as $v) {
                 $arr[] = HousingExtra::getDescription($v);
             }
             return $arr;
-        })->implode(',');
+        })->implode('、');
         $grid->bedroom_images('卧室图片')->display(function ($images) {
             $arr = [];
             foreach ($images as $v) {
