@@ -53,10 +53,18 @@ class HousingResource extends JsonResource
             ]),
             $this->mergeWhen($this->showInfoFields, [
                 'extra' => $this->format($extras),
-                'bedroom_images' => $this->getImagesInfo($this->bedroom_images, '卧室'),
-                'parlour_images' => $this->getImagesInfo($this->parlour_images, '客厅'),
-                'kitchen_images' => $this->getImagesInfo($this->kitchen_images, '厨房'),
-                'toilet_images' => $this->getImagesInfo($this->toilet_images, '公共卫生间'),
+                'images' => array_merge(
+                    $this->getImagesInfo($this->bedroom_images, '卧室'),
+                    $this->getImagesInfo($this->parlour_images, '客厅'),
+                    $this->getImagesInfo($this->kitchen_images, '厨房'),
+                    $this->getImagesInfo($this->toilet_images, '公共卫生间'),
+                ),
+                'image_url' => array_merge(
+                    $this->getImages($this->bedroom_images),
+                    $this->getImages($this->parlour_images),
+                    $this->getImages($this->kitchen_images),
+                    $this->getImages($this->toilet_images),
+                ),
                 'status' => HousingStatus::getDescription($this->status),
                 'view_status' => ($view_status) ? 1 : 0,
             ]),
@@ -94,7 +102,7 @@ class HousingResource extends JsonResource
     public function format($arr)
     {
         foreach ($arr as $k => $v) {
-            $res[] = ['id' => $k, 'name' => $v, 'url' => ''];
+            $res[] = ['id' => $k, 'name' => $v, 'url' => HousingExtra::getIcon($k)];
         }
         return ($res) ?? [];
     }
