@@ -28,13 +28,13 @@ Route::prefix('v1')->group(function () {
             Route::post('housings/favorite', [HousingsController::class, 'favor']);
             // 取消收藏房源
             Route::delete('housings/favorite', [HousingsController::class, 'disfavor']);
-            // 房源列表
-            Route::post('housings/list', [HousingsController::class, 'index']);
             Route::post('housings/info', [HousingsController::class, 'show']);
             Route::post('housings', [HousingsController::class, 'store']);
             // 上传图片
             Route::post('images', [ImageController::class, 'store']);
         });
+        // 房源列表
+        Route::post('housings/list', [HousingsController::class, 'index']);
         // 我的
         Route::post('mine', [UsersController::class, 'mine']);
         // 轮播图
