@@ -41,6 +41,7 @@ Route::prefix('v1')->group(function () {
         Route::post('banners', [BannersController::class, 'index']);
         Route::post('banners/info', [BannersController::class, 'show']);
         // 文章
+        Route::post('articles/list', [ArticlesController::class, 'index']);
         Route::post('articles/info', [ArticlesController::class, 'show']);
     });
 });

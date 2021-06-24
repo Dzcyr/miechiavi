@@ -15,8 +15,10 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->tinyInteger('type')->unsigned()->comment('类型');
             $table->string('title');
             $table->text('desc');
+            $table->integer('rank')->comment('顺序');
             $table->softDeletes();
             $table->timestamps();
         });
