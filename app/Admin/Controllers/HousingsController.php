@@ -123,7 +123,7 @@ class HousingsController extends AdminController
         $form->multipleSelect('special', '特色')->options(HousingSpecial::asSelectArray());
         $form->multipleSelect('extra', '配套设施')->options(HousingExtra::asSelectArray());
         // $form->editor('desc', '详情')->rules('required');
-        $form->text('desc', '详情')->rules('required');
+        $form->textarea('desc', '详情')->rules('required');
         $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_BEDROOM_IMAGES)))->uniqueName()->rules(function ($form) {
             if ((!$form->model()->id)) {
                 return 'required|image';
