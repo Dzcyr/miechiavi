@@ -20,7 +20,7 @@ class Housing extends Model
     // 特色
     public function getSpecialAttribute($value)
     {
-        return explode(',', $value);
+        return explode('、', $value);
     }
     public function setSpecialAttribute($value)
     {
@@ -30,7 +30,7 @@ class Housing extends Model
     // 配套设施
     public function getExtraAttribute($value)
     {
-        return explode(',', $value);
+        return explode('、', $value);
     }
     public function setExtraAttribute($value)
     {
