@@ -15,7 +15,7 @@ class UsersController extends Controller
     public function mine()
     {
         $storage = \Storage::disk(env('FILESYSTEM_DRIVER'));
-        $path = 'other/mine/';
+        $path = 'others/icons/';
 
         $housingNum = $this->getHousingNum();
         $favoriteNum = $this->getFavoriteNum();
@@ -30,10 +30,10 @@ class UsersController extends Controller
                 ['id' => 4, 'title' => '房间', 'type' => 'fj', 'dot' => (bool) $housingNum, 'number' => $housingNum]
             ],
             'tools' => [
-                ['id' => 1, 'title' => '使用协议', 'icon' => '', 'type' => 'syxx'],
-                ['id' => 2, 'title' => '规则', 'icon' => '', 'type' => 'gz'],
-                ['id' => 3, 'title' => '关于我们', 'icon' => '', 'type' => 'gywm'],
-                ['id' => 4, 'title' => '客服服务', 'icon' => '', 'type' => 'khfw']
+                ['id' => 1, 'title' => '使用协议', 'icon' => $storage->url($path . '1.png'), 'type' => 'syxx'],
+                ['id' => 2, 'title' => '规则', 'icon' => $storage->url($path . '1.png'), 'type' => 'gz'],
+                ['id' => 3, 'title' => '关于我们', 'icon' => $storage->url($path . '1.png'), 'type' => 'gywm'],
+                ['id' => 4, 'title' => '客服服务', 'icon' => $storage->url($path . '1.png'), 'type' => 'khfw']
             ]
         ]);
     }
