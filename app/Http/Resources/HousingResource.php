@@ -19,11 +19,11 @@ class HousingResource extends JsonResource
         $user = $request->user();
         $specials = [];
         foreach ($this->special as $v) {
-            $specials[] = HousingSpecial::getDescription($v);
+            $specials[$v] = HousingSpecial::getDescription($v);
         }
         $extras = [];
         foreach ($this->extra as $v) {
-            $extras[] = HousingExtra::getDescription($v);
+            $extras[$v] = HousingExtra::getDescription($v);
         }
         return [
             'id' => $this->id,
