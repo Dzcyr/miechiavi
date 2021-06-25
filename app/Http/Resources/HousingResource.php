@@ -25,7 +25,12 @@ class HousingResource extends JsonResource
             $extras[] = HousingExtra::getDescription($v);
         }
         $user = $request->user();
-        $view_status = ($user) ? count($user->favoriteHousings()->find($this->id)) : 0;
+        if ($user) {
+            $favorites = $user->favoriteHousings()->find($this->id);
+            if (!empty($favorites)) {
+                $favorite_status = count($favorites->toArray());
+            }
+        }
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -66,7 +71,7 @@ class HousingResource extends JsonResource
                     $this->getImages($this->toilet_images),
                 ),
                 'status' => HousingStatus::getDescription($this->status),
-                'view_status' => $view_status,
+                'favorite_status' => ($favorite_status) ?? 0,
             ]),
         ];
     }

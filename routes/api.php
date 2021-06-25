@@ -20,6 +20,10 @@ Route::prefix('v1')->group(function () {
         Route::middleware('api.refresh')->group(function () {
             // 更新用户信息
             Route::put('user', [UsersController::class, 'update']);
+            // 我的收藏
+            Route::post('user/favorites', [UsersController::class, 'favorites']);
+            // 我的浏览
+            Route::post('user/views', [UsersController::class, 'views']);
             // 我的房源
             Route::post('user/housings', [UsersController::class, 'housings']);
             // 房源下拉框列表

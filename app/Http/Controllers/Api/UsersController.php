@@ -51,6 +51,36 @@ class UsersController extends Controller
     }
 
     /**
+     * 我的收藏
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-25
+     * @return void
+     */
+    public function favorites()
+    {
+        $user = auth('api')->user();
+        return $this->success(HousingResource::collection(
+            $user->favoriteHousings()->paginate(10)
+        ));
+    }
+
+    /**
+     * 我的浏览
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-25
+     * @return void
+     */
+    public function views()
+    {
+        $user = auth('api')->user();
+        return $this->success(HousingResource::collection(
+            $user->viewHousings()->paginate(10)
+        ));
+    }
+
+    /**
      * 我的房源
      *
      * @Author 佟飞
