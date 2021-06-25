@@ -16,6 +16,7 @@ class HousingResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = $request->user();
         $specials = [];
         foreach ($this->special as $v) {
             $specials[] = HousingSpecial::getDescription($v);
@@ -23,13 +24,6 @@ class HousingResource extends JsonResource
         $extras = [];
         foreach ($this->extra as $v) {
             $extras[] = HousingExtra::getDescription($v);
-        }
-        $user = $request->user();
-        if ($user) {
-            $favorites = $user->favoriteHousings()->find($this->id);
-            if (!empty($favorites)) {
-                $favorite_status = count($favorites->toArray());
-            }
         }
         return [
             'id' => $this->id,
@@ -71,7 +65,7 @@ class HousingResource extends JsonResource
                     $this->getImages($this->toilet_images),
                 ),
                 'status' => HousingStatus::getDescription($this->status),
-                'favorite_status' => ($favorite_status) ?? 0,
+                'favorite_status' => ($user && !empty($user->favoriteHousings()->find($this->id))) ? 1 : 0,
             ]),
         ];
     }
