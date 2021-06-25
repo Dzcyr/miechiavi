@@ -56,36 +56,38 @@ final class HousingExtra extends Enum
 
     public static function getIcon($value)
     {
+        $storage = \Storage::disk(env('FILESYSTEM_DRIVER'));
+        $path = 'others/icons/';
         switch ($value) {
             case self::REFRIGERATOR:
-                $url = '1.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::PRIVATE_BATHROOM:
-                $url = '2.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::ELEVATOR:
-                $url = '3.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::AIR_CONDITIONER:
-                $url = '4.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::HEATING:
-                $url = '5.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::CLOSET:
-                $url = '6.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::BALCONY:
-                $url = '7.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::HOT_WATER:
-                $url = '8.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::WIFI:
-                $url = '9.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
             case self::WASHING_MACHINE:
-                $url = '10.jpg';
+                $url = $storage->url($path . '1.png');
                 break;
         }
         return ($url) ?? '';
