@@ -76,8 +76,6 @@ class HousingsController extends Controller
         if ($district = $request->district) {
             $query->where('district', $district);
         }
-
-
         // 房源面积(㎡)
         if ($space = $request->space) {
             $query->whereBetween('space', [$space[0], $space[1]]);
@@ -94,7 +92,6 @@ class HousingsController extends Controller
         if ($heating = $request->heating) {
             $query->where('heating', $heating);
         }
-
         return $this->success(HousingResource::collection(
             $query->recent()->paginate(10)
         ));
