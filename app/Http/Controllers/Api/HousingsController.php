@@ -100,6 +100,36 @@ class HousingsController extends Controller
         ));
     }
 
+    /**
+     * 搜索
+     *
+     * @Author 佟飞
+     * @DateTime 2021-06-26
+     * @param Request $request
+     * @param Housing $housing
+     * @return void
+     */
+    public function search(Request $request, Housing $housing)
+    {
+        $builder = $housing->query();
+        if ($search = $request->search) {
+            $builder->where(function ($query) use ($search) {
+                $extras = HousingExtra::asSelectArray();
+                $extra = array_search($search, $extras);
+                if ($extra) {
+                    $query->orWhereRaw('FIND_IN_SET(' . $extra . ',`extra`)');
+                }
+                $specials = HousingSpecial::asSelectArray();
+                $special = array_search($search, $specials);
+                if ($special) {
+                    $query->orWhereRaw('FIND_IN_SET(' . $special . ',`special`)');
+                }
+            });
+        }
+        return $this->success(HousingResource::collection(
+            $builder->recent()->paginate(10)
+        ));
+    }
 
     /**
      * 新增房源信息

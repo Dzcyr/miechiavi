@@ -39,6 +39,7 @@ Route::prefix('v1')->group(function () {
         });
         // 房源列表
         Route::post('housings/list', [HousingsController::class, 'index']);
+        Route::post('housings/search', [HousingsController::class, 'search']);
         // 我的
         Route::post('mine', [UsersController::class, 'mine']);
         // 轮播图

@@ -20,21 +20,21 @@ class Housing extends Model
     // 特色
     public function getSpecialAttribute($value)
     {
-        return explode('、', $value);
+        return explode(',', $value);
     }
     public function setSpecialAttribute($value)
     {
-        $this->attributes['special'] = implode('、', $value);
+        $this->attributes['special'] = implode(',', $value);
     }
 
     // 配套设施
     public function getExtraAttribute($value)
     {
-        return explode('、', $value);
+        return explode(',', $value);
     }
     public function setExtraAttribute($value)
     {
-        $this->attributes['extra'] = implode('、', $value);
+        $this->attributes['extra'] = implode(',', $value);
     }
 
     // 卧室图片
