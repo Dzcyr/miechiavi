@@ -25,9 +25,9 @@ class UsersController extends Controller
             // 'bg' => $storage->url($path.'bg.png'),
             'housings' => [
                 ['id' => 1, 'title' => '收藏', 'type' => 'sc', 'dot' => (bool) $favoriteNum, 'number' => $favoriteNum],
-                ['id' => 2, 'title' => '合同', 'type' => 'ht', 'dot' => (bool) 1, 'number' => 1],
+                //['id' => 2, 'title' => '合同', 'type' => 'ht', 'dot' => (bool) 1, 'number' => 1],
                 ['id' => 3, 'title' => '浏览', 'type' => 'll', 'dot' => (bool) $viewNum, 'number' => $viewNum],
-                ['id' => 4, 'title' => '房间', 'type' => 'fj', 'dot' => (bool) $housingNum, 'number' => $housingNum]
+                ['id' => 4, 'title' => '房源', 'type' => 'fj', 'dot' => (bool) $housingNum, 'number' => $housingNum]
             ],
             'tools' => [
                 ['id' => 1, 'title' => '使用协议', 'icon' => $storage->url($path . '1.png'), 'type' => 'syxx'],
