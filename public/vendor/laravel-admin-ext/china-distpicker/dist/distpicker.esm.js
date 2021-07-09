@@ -39,6 +39,7 @@ var DISTRICTS = {
     110000 : '托斯卡纳',
     120000 : '伦巴第',
     130000 : '拉齐奥',
+    140000 : '罗马涅',
   },
   110000 : {
     110100 : '佛罗伦萨'
@@ -112,7 +113,21 @@ var DISTRICTS = {
     130129 : "Vittorio Emanuele",
     130130 : "Tiburtina",
     130131 : "Pigneto"
-  }
+  },
+  140000 : {
+    140100 : '博洛尼亚',
+  },
+  140100 : {
+    140102 : "Città Universitaria",
+    140104 : "Centro Storico",
+    140105 : "Bologna Mazini",
+    140107 : "Murri",
+    140108 : "San Donato",
+    140109 : "Rastignano",
+    140110 : "Foscherara",
+    140111 : "Stazione Centrale",
+    140121 : "Giardini Margherita"
+  },
 };
 
 var WINDOW = typeof window !== 'undefined' ? window : {};
