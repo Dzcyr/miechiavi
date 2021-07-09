@@ -152,7 +152,7 @@ class HousingsController extends AdminController
                 return 'required|image';
             }
         });
-        $form->text('wecaht', '微信')->rules('required');
+        $form->text('wechat', '微信')->rules('required');
         $form->text('email', '邮箱')->rules('required');
         
         $form->select('is_lease', '出租状态')->options(HousingLease::asSelectArray())->rules('required');
