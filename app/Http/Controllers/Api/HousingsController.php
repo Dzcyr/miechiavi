@@ -38,6 +38,10 @@ class HousingsController extends Controller
                     $this->format(array_slice(config('position.city'), 2, 1)[0]),
                     $this->format(array_slice(config('position.district'), 2, 1)[0])
                 ],
+                'boluoniya' => [
+                    $this->format(array_slice(config('position.city'), 3, 1)[0]),
+                    $this->format(array_slice(config('position.district'), 3, 1)[0])
+                ]
             ],
             'heating' => $this->format(HousingHeating::asSelectArray()),
             'special' => $this->format(HousingSpecial::asSelectArray()),
