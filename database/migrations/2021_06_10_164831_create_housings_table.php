@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\HousingStatus;
+use App\Enums\{HousingLease, HousingWithdraw, HousingStatus};
 
 class CreateHousingsTable extends Migration
 {
@@ -38,6 +38,10 @@ class CreateHousingsTable extends Migration
             $table->text('toilet_images')->comment('公共卫生间图片');
             $table->decimal('longitude', 10, 7)->nullable()->comment('经度');
             $table->decimal('latitude', 10, 7)->nullable()->comment('纬度');
+            $table->string('wechat')->comment('微信');
+            $table->string('email')->comment('邮箱');
+            $table->tinyInteger('is_lease')->default(HousingLease::OFF)->comment('出租状态');
+            $table->tinyInteger('is_withdraw')->default(HousingWithdraw::OFF)->comment('下架状态');
             $table->tinyInteger('status')->default(HousingStatus::DEFAULT)->comment('状态');
             $table->softDeletes();
             $table->timestamps();
