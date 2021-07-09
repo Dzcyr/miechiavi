@@ -43,8 +43,10 @@ class HousingResource extends JsonResource
             'desc' => $this->desc,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
-            'is_lease' => HousingLease::getDescription($this->is_lease),
-            'is_withdraw' => HousingWithdraw::getDescription($this->is_withdraw),
+            'is_lease' => $this->is_lease,
+            'is_withdraw' => $this->is_withdraw,
+            'is_lease_word' => HousingLease::getDescription($this->is_lease),
+            'is_withdraw_word' => HousingWithdraw::getDescription($this->is_withdraw),
         ];
         if (!$this->showInfoFields) {
             $res['extra'] = implode('、', $extras);
