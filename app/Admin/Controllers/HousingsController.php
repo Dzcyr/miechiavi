@@ -8,7 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Illuminate\Support\Facades\Storage;
 use Encore\Admin\Controllers\AdminController;
-use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingStatus, Image};
+use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingLease, HousingWithdraw, HousingStatus, Image};
 
 class HousingsController extends AdminController
 {
@@ -96,6 +96,14 @@ class HousingsController extends AdminController
         })->image('', 100, 100);
         $grid->longitude('经度');
         $grid->latitude('纬度');
+        $grid->wechat('微信');
+        $grid->email('邮箱');
+        $grid->is_lease('出租状态')->display(function ($lease) {
+            return HousingLease::getDescription($lease);
+        });
+        $grid->is_withdraw('下架状态')->display(function ($withdraw) {
+            return HousingWithdraw::getDescription($withdraw);
+        });
         $grid->status('状态')->display(function ($status) {
             return HousingStatus::getDescription($status);
         });
@@ -144,6 +152,11 @@ class HousingsController extends AdminController
                 return 'required|image';
             }
         });
+        $form->text('wecaht', '微信')->rules('required');
+        $form->text('email', '邮箱')->rules('required');
+        
+        $form->select('is_lease', '出租状态')->options(HousingLease::asSelectArray())->rules('required');
+        $form->select('is_withdraw', '下架状态')->options(HousingWithdraw::asSelectArray())->rules('required');
         $form->select('status', '状态')->options(HousingStatus::asSelectArray())->rules('required');
         return $form;
     }
