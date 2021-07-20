@@ -9,7 +9,8 @@ class Housing extends Model
         'house_type', 'toward', 'province', 'city', 'district',
         'address', 'heating', 'special', 'extra', 'desc',
         'bedroom_images', 'parlour_images', 'kitchen_images', 'toilet_images',
-        'longitude', 'latitude', 'wechat', 'email', 'is_lease', 'is_withdraw', 'status'
+        'longitude', 'latitude', 'wechat', 'email', 'is_lease', 'is_withdraw',
+        'begin_date', 'end_date', 'status'
     ];
 
     public function user()

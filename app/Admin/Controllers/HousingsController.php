@@ -104,6 +104,8 @@ class HousingsController extends AdminController
         $grid->is_withdraw('下架状态')->display(function ($withdraw) {
             return HousingWithdraw::getDescription($withdraw);
         });
+        $grid->begin_date('开始时间');
+        $grid->end_date('结束时间');
         $grid->status('状态')->display(function ($status) {
             return HousingStatus::getDescription($status);
         });
@@ -154,9 +156,10 @@ class HousingsController extends AdminController
         });
         $form->text('wechat', '微信')->rules('required');
         $form->text('email', '邮箱')->rules('required');
-        
         $form->select('is_lease', '出租状态')->options(HousingLease::asSelectArray())->rules('required');
         $form->select('is_withdraw', '下架状态')->options(HousingWithdraw::asSelectArray())->rules('required');
+        $form->date('begin_date', '开始时间')->format('YYYY-MM-DD')->rules('required');
+        $form->date('end_date', '结束时间')->format('YYYY-MM-DD')->rules('required');
         $form->select('status', '状态')->options(HousingStatus::asSelectArray())->rules('required');
         return $form;
     }
