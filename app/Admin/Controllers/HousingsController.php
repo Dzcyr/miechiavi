@@ -119,7 +119,7 @@ class HousingsController extends AdminController
     {
         $form = new Form(new Housing());
 
-        $form->select('user_id', '选择用户')->options(User::orderBy('id', 'desc')->pluck('weapp_openid', 'id'))->rules('required');
+        $form->select('user_id', '选择用户')->options(User::orderBy('id', 'desc')->pluck('nickname', 'id'))->rules('required');
         $form->text('title', '标题')->rules('required');
         $form->decimal('rent', '租金(€)')->rules('required');
         $form->number('floor', '楼层')->rules('required');
