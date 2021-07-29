@@ -94,7 +94,7 @@ class HousingsController extends AdminController
             }
             return $arr;
         })->image('', 100, 100);
-        $grid->field('位置')->latlong('latitude', 'longitude', $height = 400, $zoom = 16);
+        $grid->field('位置')->latlong('lat_column', 'long_column', $height = 400, $zoom = 16);
         $grid->wechat('微信');
         $grid->email('邮箱');
         $grid->is_lease('出租状态')->display(function ($lease) {

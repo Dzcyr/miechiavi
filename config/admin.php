@@ -192,7 +192,7 @@ return [
             'enable' => true,
 
             // Specify the default provider
-            'default' => 'tencent',
+            'default' => 'google',
 
             // According to the selected provider above, fill in the corresponding api_key
             'providers' => [
