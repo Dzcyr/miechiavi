@@ -24,7 +24,7 @@ use App\Admin\Actions\Post\BatchRestore;
  *
  */
 
-Encore\Admin\Form::forget(['map']);
+// Encore\Admin\Form::forget(['map']);
 
 Form::extend('editor', WangEditor::class);
 
