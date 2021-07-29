@@ -109,7 +109,7 @@ class HousingsController extends AdminController
         $grid->status('状态')->display(function ($status) {
             return HousingStatus::getDescription($status);
         });
-        $grid->field('Position')->latlong('lat_column', 'long_column', $height = 400, $zoom = 16);
+        $grid->field('位置')->latlong('lat_column', 'long_column', $height = 400, $zoom = 16);
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
 
@@ -161,7 +161,7 @@ class HousingsController extends AdminController
         $form->date('begin_date', '开始时间')->format('YYYY-MM-DD')->rules('required');
         $form->date('end_date', '结束时间')->format('YYYY-MM-DD')->rules('required');
         $form->select('status', '状态')->options(HousingStatus::asSelectArray())->rules('required');
-        $form->latlong('latitude', 'longitude', 'Position');
+        $form->latlong('latitude', 'longitude', '位置');
         return $form;
     }
 }
