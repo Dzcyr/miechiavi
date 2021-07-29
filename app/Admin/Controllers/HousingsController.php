@@ -109,7 +109,7 @@ class HousingsController extends AdminController
         $grid->status('状态')->display(function ($status) {
             return HousingStatus::getDescription($status);
         });
-        $grid->field('位置')->latlong('lat_column', 'long_column', $height = 400, $zoom = 16);
+        $grid->field('位置')->latlong('latitude', 'longitude', $height = 400, $zoom = 16);
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
 
