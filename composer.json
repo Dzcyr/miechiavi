@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -13,6 +16,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "jacobcyl/ali-oss-storage": "^2.1",
         "laravel-admin-ext/china-distpicker": "v1.4.1",
+        "laravel-admin-ext/latlong": "1.x",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "overtrue/laravel-lang": "^5.0",
