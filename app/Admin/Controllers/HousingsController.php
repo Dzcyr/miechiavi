@@ -124,19 +124,33 @@ class HousingsController extends AdminController
         $form->select('user_id', '选择用户')->options(User::orderBy('id', 'desc')->pluck('nickname', 'id'))->rules('required');
         $form->text('title', '标题')->rules('required');
         $form->decimal('rent', '租金(€)')->rules('required');
-        $form->number('floor', '楼层')->rules('required');
-        $form->decimal('space', '房屋面积(㎡)');
         $form->select('type', '租房类型')->options(HousingType::asSelectArray())->rules('required');
-        $form->select('house_type', '户型')->options(HousingHouseType::asSelectArray())->rules('required');
-        $form->select('toward', '朝向')->options(HousingToward::asSelectArray())->rules('required');
         $form->distpicker(['province', 'city', 'district']);
         $form->text('address', '详细地址')->rules('required');
         $form->select('heating', '供暖方式')->options(HousingHeating::asSelectArray())->rules('required');
+        $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_BEDROOM_IMAGES)))->uniqueName()->rules(function ($form) {
+            if ((!$form->model()->id)) {
+                return 'required|image';
+            }
+        });
+        $form->text('wechat', '微信')->rules('required');
+        $form->text('email', '邮箱')->rules('required');
+        $form->select('is_lease', '出租状态')->options(HousingLease::asSelectArray())->rules('required');
+        $form->select('is_withdraw', '下架状态')->options(HousingWithdraw::asSelectArray())->rules('required');
+        $form->date('begin_date', '开始时间')->format('YYYY-MM-DD')->rules('required');
+        $form->date('end_date', '结束时间')->format('YYYY-MM-DD')->rules('required');
+        $form->select('cost', '中介费')->options(HousingCost::asSelectArray())->rules('required');
+        $form->select('status', '状态')->options(HousingStatus::asSelectArray())->rules('required');
+        $form->textarea('desc', '详情')->rules('required');
+
+
+        $form->number('floor', '楼层');
+        $form->decimal('space', '房屋面积(㎡)');
+        $form->select('house_type', '户型')->options(HousingHouseType::asSelectArray());
+        $form->select('toward', '朝向')->options(HousingToward::asSelectArray());
         $form->multipleSelect('special', '特色')->options(HousingSpecial::asSelectArray());
         $form->multipleSelect('extra', '配套设施')->options(HousingExtra::asSelectArray());
         // $form->editor('desc', '详情')->rules('required');
-        $form->textarea('desc', '详情')->rules('required');
-
         // $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_BEDROOM_IMAGES)))->uniqueName()->rules(function ($form) {
         //     if ((!$form->model()->id)) {
         //         return 'required|image';
@@ -157,24 +171,9 @@ class HousingsController extends AdminController
         //         return 'required|image';
         //     }
         // });
-
-
-        $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_BEDROOM_IMAGES)))->uniqueName()->rules(function ($form) {
-            if ((!$form->model()->id)) {
-                return 'required|image';
-            }
-        });
         $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_PARLOUR_IMAGES)))->uniqueName();
         $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_KITCHEN_IMAGES)))->uniqueName();
         $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_TOILET_IMAGES)))->uniqueName();
-        $form->text('wechat', '微信')->rules('required');
-        $form->text('email', '邮箱')->rules('required');
-        $form->select('is_lease', '出租状态')->options(HousingLease::asSelectArray())->rules('required');
-        $form->select('is_withdraw', '下架状态')->options(HousingWithdraw::asSelectArray())->rules('required');
-        $form->date('begin_date', '开始时间')->format('YYYY-MM-DD')->rules('required');
-        $form->date('end_date', '结束时间')->format('YYYY-MM-DD')->rules('required');
-        $form->select('cost', '中介费')->options(HousingCost::asSelectArray())->rules('required');
-        $form->select('status', '状态')->options(HousingStatus::asSelectArray())->rules('required');
         $form->latlong('latitude', 'longitude', '位置');
         return $form;
     }
