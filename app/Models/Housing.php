@@ -10,7 +10,7 @@ class Housing extends Model
         'address', 'heating', 'special', 'extra', 'desc',
         'bedroom_images', 'parlour_images', 'kitchen_images', 'toilet_images',
         'longitude', 'latitude', 'wechat', 'email', 'is_lease', 'is_withdraw',
-        'begin_date', 'end_date', 'status'
+        'begin_date', 'end_date', 'cost', 'status'
     ];
 
     public function user()

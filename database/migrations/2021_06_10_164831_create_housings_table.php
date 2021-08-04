@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\{HousingLease, HousingWithdraw, HousingStatus};
+use App\Enums\{HousingLease, HousingWithdraw, HousingCost, HousingStatus};
 
 class CreateHousingsTable extends Migration
 {
@@ -20,7 +20,7 @@ class CreateHousingsTable extends Migration
             $table->string('title')->comment('标题');
             $table->decimal('rent', 10, 2)->comment('租金(€)');
             $table->integer('floor')->comment('楼层');
-            $table->decimal('space', 10, 2)->comment('房屋面积(㎡)');
+            $table->decimal('space', 10, 2)->nullable()->comment('房屋面积(㎡)');
             $table->tinyInteger('type')->unsigned()->comment('租房类型');
             $table->tinyInteger('house_type')->unsigned()->comment('户型');
             $table->tinyInteger('toward')->unsigned()->comment('朝向');
@@ -33,9 +33,9 @@ class CreateHousingsTable extends Migration
             $table->string('extra')->nullable()->comment('配套设施');
             $table->text('desc')->comment('详情');
             $table->text('bedroom_images')->comment('卧室图片');
-            $table->text('parlour_images')->comment('客厅图片');
-            $table->text('kitchen_images')->comment('厨房图片');
-            $table->text('toilet_images')->comment('公共卫生间图片');
+            $table->text('parlour_images')->nullable()->comment('客厅图片');
+            $table->text('kitchen_images')->nullable()->comment('厨房图片');
+            $table->text('toilet_images')->nullable()->comment('公共卫生间图片');
             $table->decimal('longitude', 10, 7)->nullable()->comment('经度');
             $table->decimal('latitude', 10, 7)->nullable()->comment('纬度');
             $table->string('wechat')->comment('微信');
@@ -44,6 +44,7 @@ class CreateHousingsTable extends Migration
             $table->tinyInteger('is_withdraw')->default(HousingWithdraw::OFF)->comment('下架状态');
             $table->date('begin_date')->nullable()->comment('开始日期');
             $table->date('end_date')->nullable()->comment('结束日期');
+            $table->tinyInteger('cost')->default(HousingCost::OFF)->comment('中介费');
             $table->tinyInteger('status')->default(HousingStatus::DEFAULT)->comment('状态');
             $table->softDeletes();
             $table->timestamps();

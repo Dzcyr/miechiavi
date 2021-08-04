@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
-use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingLease, HousingWithdraw, HousingStatus};
+use App\Enums\{HousingType, HousingHouseType, HousingToward, HousingHeating, HousingSpecial, HousingExtra, HousingLease, HousingWithdraw, HousingCost, HousingStatus};
 
 class HousingResource extends JsonResource
 {
@@ -49,6 +49,8 @@ class HousingResource extends JsonResource
             'is_withdraw_word' => HousingWithdraw::getDescription($this->is_withdraw),
             'begin_date' => $this->begin_date,
             'end_date' => $this->end_date,
+            'cost' => $this->is_lease,
+            'is_lease_word' => HousingCode::getDescription($this->is_lease),
         ];
         if (!$this->showInfoFields) {
             $res['extra'] = implode('、', $extras);
