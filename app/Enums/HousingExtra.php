@@ -63,31 +63,31 @@ final class HousingExtra extends Enum
                 $url = $storage->url($path . '1.png');
                 break;
             case self::PRIVATE_BATHROOM:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '2.png');
                 break;
             case self::ELEVATOR:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '3.png');
                 break;
             case self::AIR_CONDITIONER:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '4.png');
                 break;
             case self::HEATING:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '5.png');
                 break;
             case self::CLOSET:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '6.png');
                 break;
             case self::BALCONY:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '7.png');
                 break;
             case self::HOT_WATER:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '8.png');
                 break;
             case self::WIFI:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '9.png');
                 break;
             case self::WASHING_MACHINE:
-                $url = $storage->url($path . '1.png');
+                $url = $storage->url($path . '10.png');
                 break;
         }
         return ($url) ?? '';
