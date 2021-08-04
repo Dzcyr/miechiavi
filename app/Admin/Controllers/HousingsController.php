@@ -180,9 +180,9 @@ class HousingsController extends AdminController
         //         return 'required|image';
         //     }
         // });
-        $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_PARLOUR_IMAGES)))->uniqueName()->default('["others\/empty.jpg"]');
-        $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_KITCHEN_IMAGES)))->uniqueName()->default('["others\/empty.jpg"]');
-        $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_TOILET_IMAGES)))->uniqueName()->default('["others\/empty.jpg"]');
+        $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_PARLOUR_IMAGES)))->uniqueName();
+        $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_KITCHEN_IMAGES)))->uniqueName();
+        $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_TOILET_IMAGES)))->uniqueName();
         $form->latlong('latitude', 'longitude', '位置');
         return $form;
     }

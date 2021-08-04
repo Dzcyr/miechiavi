@@ -86,7 +86,9 @@ class HousingResource extends JsonResource
     public function getImages($images)
     {
         foreach ($images as $v) {
-            $arr[] = Storage::url($v);
+            if ($v != 'others/empty.jpg') {
+                $arr[] = Storage::url($v);
+            }
         }
         return $arr ?? [];
     }
@@ -95,11 +97,13 @@ class HousingResource extends JsonResource
     {
         $num = 1;
         foreach ($images as $v) {
-            $arr[] = [
-                'id' => $num++,
-                'name' => $name,
-                'image' => Storage::url($v)
-            ];
+            if ($v != 'others/empty.jpg') {
+                $arr[] = [
+                    'id' => $num++,
+                    'name' => $name,
+                    'image' => Storage::url($v)
+                ];
+            }
         }
         return $arr ?? [];
     }
