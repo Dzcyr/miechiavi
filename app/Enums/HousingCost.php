@@ -13,10 +13,10 @@ final class HousingCost extends Enum
 	{
 		switch ($value) {
 			case self::OFF:
-				return '无需中介费';
+				return '无中介费';
 				break;
 			case self::ON:
-				return '需收中介费';
+				return '有中介费';
 				break;
 		}
 		return parent::getDescription($value);
