@@ -127,7 +127,7 @@ class HousingsController extends AdminController
         $form->select('type', '租房类型')->options(HousingType::asSelectArray())->rules('required');
         $form->distpicker(['province', 'city', 'district']);
         $form->text('address', '详细地址')->rules('required');
-        $form->select('heating', '供暖方式')->options(HousingHeating::asSelectArray())->rules('required');
+
         $form->multipleImage('bedroom_images', '卧室图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_BEDROOM_IMAGES)))->uniqueName()->rules(function ($form) {
             if ((!$form->model()->id)) {
                 return 'required|image';
@@ -148,6 +148,7 @@ class HousingsController extends AdminController
         $form->decimal('space', '房屋面积(㎡)');
         $form->select('house_type', '户型')->options(HousingHouseType::asSelectArray());
         $form->select('toward', '朝向')->options(HousingToward::asSelectArray());
+        $form->select('heating', '供暖方式')->options(HousingHeating::asSelectArray());
         $form->multipleSelect('special', '特色')->options(HousingSpecial::asSelectArray());
         $form->multipleSelect('extra', '配套设施')->options(HousingExtra::asSelectArray());
         // $form->editor('desc', '详情')->rules('required');
