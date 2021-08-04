@@ -69,28 +69,36 @@ class HousingsController extends AdminController
         $grid->bedroom_images('卧室图片')->display(function ($images) {
             $arr = [];
             foreach ($images as $v) {
-                $arr[] = Storage::url($v);
+                if (!empty($v)) {
+                    $arr[] = Storage::url($v);
+                }
             }
             return $arr;
         })->image('', 100, 100);
         $grid->parlour_images('客厅图片')->display(function ($images) {
             $arr = [];
             foreach ($images as $v) {
-                $arr[] = Storage::url($v);
+                if (!empty($v)) {
+                    $arr[] = Storage::url($v);
+                }
             }
             return $arr;
         })->image('', 100, 100);
         $grid->kitchen_images('厨房图片')->display(function ($images) {
             $arr = [];
             foreach ($images as $v) {
-                $arr[] = Storage::url($v);
+                if (!empty($v)) {
+                    $arr[] = Storage::url($v);
+                }
             }
             return $arr;
         })->image('', 100, 100);
         $grid->toilet_images('公共卫生间图片')->display(function ($images) {
             $arr = [];
             foreach ($images as $v) {
-                $arr[] = Storage::url($v);
+                if (!empty($v)) {
+                    $arr[] = Storage::url($v);
+                }
             }
             return $arr;
         })->image('', 100, 100);
