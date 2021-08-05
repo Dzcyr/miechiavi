@@ -18,12 +18,16 @@ class HousingResource extends JsonResource
     {
         $user = $request->user();
         $specials = [];
-        foreach ($this->special as $v) {
-            $specials[$v] = HousingSpecial::getDescription($v);
+        if(!empty($this->special)) {
+            $special = explode(',', $this->special);
+            foreach ($special as $v) {
+                $specials[$v] = HousingSpecial::getDescription($v);
+            }
         }
         $extras = [];
         if(!empty($this->extra)) {
-            foreach ($this->extra as $v) {
+            $extra = explode(',', $this->extra);
+            foreach ($extra as $v) {
                 $extras[$v] = HousingExtra::getDescription($v);
             }
         }
@@ -41,7 +45,7 @@ class HousingResource extends JsonResource
             'district' => config('position.district.' . $this->city . '.' . $this->district),
             'address' => $this->address,
             'heating' => HousingHeating::getDescription($this->heating),
-            'special' => implode('、', $specials),
+            'special' => (!empty($specials)) ? implode('、', $specials) : '',
             'desc' => $this->desc,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
@@ -55,11 +59,11 @@ class HousingResource extends JsonResource
             'is_cost_word' => HousingCost::getDescription($this->cost),
         ];
         if (!$this->showInfoFields) {
-            $res['extra'] = (!empty($this->extra)) ? implode('、', $extras) : '';
+            $res['extra'] = (!empty($extras)) ? implode('、', $extras) : '';
             $res['bedroom_images'] = $this->getImages($this->bedroom_images);
         }
         if ($this->showInfoFields) {
-            $res['extra'] = (!empty($this->extra)) ? $this->format($extras) : [];
+            $res['extra'] = (!empty($extras)) ? $this->format($extras) : [];
             $res['images'] = array_merge(
                 $this->getImagesInfo($this->bedroom_images, '卧室'),
                 $this->getImagesInfo($this->parlour_images, '客厅'),
