@@ -49,8 +49,8 @@ class HousingResource extends JsonResource
             'is_withdraw_word' => HousingWithdraw::getDescription($this->is_withdraw),
             'begin_date' => $this->begin_date,
             'end_date' => $this->end_date,
-            'cost' => $this->is_lease,
-            'is_lease_word' => HousingCost::getDescription($this->is_lease),
+            'cost' => $this->cost,
+            'is_cost_word' => HousingCost::getDescription($this->cost),
         ];
         if (!$this->showInfoFields) {
             $res['extra'] = implode('、', $extras);
