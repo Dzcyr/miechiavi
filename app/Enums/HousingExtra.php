@@ -56,10 +56,12 @@ final class HousingExtra extends Enum
 
     public static function getIcon($value)
     {
-        $storage = \Storage::disk(env('FILESYSTEM_DRIVER'));
-        $path = 'others/icons/';
-        //$url = $storage->url($path . HousingExtra::getDescription($value) . '.png');
-        $url = $storage->url($path . '1_old.png');
+        if(!empty($value)) {
+            $storage = \Storage::disk(env('FILESYSTEM_DRIVER'));
+            $path = 'others/icons/';
+            $url = $storage->url($path . HousingExtra::getDescription($value) . '.png');
+            // $url = $storage->url($path . '1_old.png');
+        }
         return ($url) ?? '';
     }
 }
