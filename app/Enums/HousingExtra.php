@@ -58,7 +58,8 @@ final class HousingExtra extends Enum
     {
         $storage = \Storage::disk(env('FILESYSTEM_DRIVER'));
         $path = 'others/icons/';
-        $url = $storage->url($path . HousingExtra::getDescription($value) . '.png');
+        //$url = $storage->url($path . HousingExtra::getDescription($value) . '.png');
+        $url = $storage->url($path . '1_old.png');
         return ($url) ?? '';
     }
 }
