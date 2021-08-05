@@ -22,8 +22,10 @@ class HousingResource extends JsonResource
             $specials[$v] = HousingSpecial::getDescription($v);
         }
         $extras = [];
-        foreach ($this->extra as $v) {
-            $extras[$v] = HousingExtra::getDescription($v);
+        if(!empty($this->extra)) {
+            foreach ($this->extra as $v) {
+                $extras[$v] = HousingExtra::getDescription($v);
+            }
         }
         $res = [
             'id' => $this->id,
@@ -53,11 +55,11 @@ class HousingResource extends JsonResource
             'is_cost_word' => HousingCost::getDescription($this->cost),
         ];
         if (!$this->showInfoFields) {
-            $res['extra'] = implode('、', $extras);
+            $res['extra'] = (!empty($this->extra)) ? implode('、', $extras) : '';
             $res['bedroom_images'] = $this->getImages($this->bedroom_images);
         }
         if ($this->showInfoFields) {
-            $res['extra'] = $this->format($extras);
+            $res['extra'] = (!empty($this->extra)) ? $this->format($extras) : [];
             $res['images'] = array_merge(
                 $this->getImagesInfo($this->bedroom_images, '卧室'),
                 $this->getImagesInfo($this->parlour_images, '客厅'),
@@ -110,8 +112,11 @@ class HousingResource extends JsonResource
 
     public function format($arr)
     {
-        foreach ($arr as $k => $v) {
-            $res[] = ['id' => $k, 'name' => $v, 'url' => HousingExtra::getIcon($k)];
+        $res = [];
+        if (!empty($arr)) {
+            foreach ($arr as $k => $v) {
+                $res[] = ['id' => $k, 'name' => $v, 'url' => HousingExtra::getIcon($k)];
+            }
         }
         return ($res) ?? [];
     }
