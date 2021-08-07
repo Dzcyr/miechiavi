@@ -141,6 +141,9 @@ class HousingsController extends AdminController
                 return 'required|image';
             }
         });
+        $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_PARLOUR_IMAGES)))->uniqueName();
+        $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_KITCHEN_IMAGES)))->uniqueName();
+        $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_TOILET_IMAGES)))->uniqueName();
         $form->text('wechat', '微信')->rules('required');
         $form->text('email', '邮箱')->rules('required');
         $form->select('is_lease', '出租状态')->options(HousingLease::asSelectArray())->rules('required');
@@ -180,9 +183,6 @@ class HousingsController extends AdminController
         //         return 'required|image';
         //     }
         // });
-        $form->multipleImage('parlour_images', '客厅图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_PARLOUR_IMAGES)))->uniqueName();
-        $form->multipleImage('kitchen_images', '厨房图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_KITCHEN_IMAGES)))->uniqueName();
-        $form->multipleImage('toilet_images', '公共卫生间图片')->removable()->sortable()->move(oss_path_processing(Image::getDescription(Image::HOUSINGS_TOILET_IMAGES)))->uniqueName();
         $form->latlong('latitude', 'longitude', '位置');
         return $form;
     }
