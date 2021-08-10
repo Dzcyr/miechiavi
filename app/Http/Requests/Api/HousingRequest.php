@@ -9,21 +9,21 @@ class HousingRequest extends FormRequest
         return [
             'title' => 'required',
             'rent' => 'required',
-            'floor' => 'required',
-            'space' => 'required',
+            //'floor' => 'required',
+            //'space' => 'required',
             'type' => 'required',
-            'house_type' => 'required',
-            'toward' => 'required',
+            //'house_type' => 'required',
+            //'toward' => 'required',
             'province' => 'required',
             'city' => 'required',
             'district' => 'required',
             'address' => 'required',
-            'heating' => 'required',
+            //'heating' => 'required',
             'desc' => 'required',
             'bedroom_images' => 'required',
-            'parlour_images' => 'required',
-            'kitchen_images' => 'required',
-            'toilet_images' => 'required'
+            //'parlour_images' => 'required',
+            //'kitchen_images' => 'required',
+            //'toilet_images' => 'required'
         ];
     }
 
